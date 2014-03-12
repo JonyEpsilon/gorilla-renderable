@@ -6,4 +6,4 @@ The protocol that must be implemented to enable custom rendering in
 
 ## Licence
 
-The lein Gorilla plugin is licensed to you under the MIT licence. See LICENCE.txt for details.
+This code is licensed to you under the MIT licence. See LICENCE.txt for details.
