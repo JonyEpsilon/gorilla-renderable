@@ -1,7 +1,7 @@
 # gorilla-renderable
 
 The protocol that must be implemented to enable custom rendering in
-[Gorilla REPL](https://github.com/JonyEpsilon/gorilla-repl).
+[Gorilla REPL](http://gorilla-repl.org).
 
 
 ## Licence
