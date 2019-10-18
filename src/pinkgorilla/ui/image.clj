@@ -2,14 +2,16 @@
 ;;;;
 ;;;; gorilla-repl is licenced to you under the MIT licence. See the file LICENCE.txt for full details.
 
-(ns gorilla-repl.image
-  (:import [java.awt Image]
-           [java.awt.image BufferedImage]
-           [java.io ByteArrayOutputStream]
-           [javax.imageio ImageIO])
-  (:require [clojure.data.codec.base64 :as b64]
-            [clojure.string :as string]
-            [gorilla-renderable.core :as render]))
+(ns pinkgorilla.ui.image
+  (:import 
+   [java.awt Image]
+   [java.awt.image BufferedImage]
+   [java.io ByteArrayOutputStream]
+   [javax.imageio ImageIO])
+  (:require 
+   [clojure.data.codec.base64 :as b64]
+   [clojure.string :as string]
+   [pinkgorilla.ui.gorilla-renderable :as render]))
 
 (defn image-to-bytes [^Image image ^String type width height]
   (let [bi (BufferedImage. width height (if (#{"png" "gif"} type)

@@ -2,9 +2,9 @@
 ;;;;
 ;;;; gorilla-repl is licenced to you under the MIT licence. See the file LICENCE.txt for full details.
 
-(ns gorilla-repl.hiccup_renderer
+(ns pinkgorilla.ui.renderer
   (:require [clojure.string :as string]
-            [gorilla-renderable.core :as r]))
+            [pinkgorilla.ui.gorilla-renderable :as r]))
 
 
 ;;; Helper functions
@@ -21,15 +21,9 @@
 (defn- span-render
   [thing class]
   {:type :html
-   :content [:span {:class class } (pr-str thing)]
-   ;; (str "<span class='" class "'>" (escape-html (pr-str thing)) "</span>")
+   :content (str "<span class='" class "'>" (escape-html (pr-str thing)) "</span>")
    :value (pr-str thing)})
 
-(defn- span
-  [class value]
-  [:span {:class class } value ]
-  ;; "<span class='clj-lazy-seq'>)</span>"
-  )
 
 ;;; ** Renderers for basic Clojure forms **
 
@@ -119,9 +113,9 @@
   r/Renderable
   (render [self]
     {:type :list-like
-     :open (span "clj-vector" "[")
-     :close (span "clj-vector" "]")
-     :separator [:span " "]
+     :open "<span class='clj-vector'>[</span>"
+     :close "<span class='clj-vector'>]</span>"
+     :separator " "
      :items (map r/render self)
      :value (pr-str self)}))
 
@@ -129,9 +123,9 @@
   r/Renderable
   (render [self]
     {:type :list-like
-     :open (span "clj-lazy-seq" "(")
-     :close (span "clj-lazy-seq" ")")
-     :separator [:span " "]
+     :open "<span class='clj-lazy-seq'>(</span>"
+     :close "<span class='clj-lazy-seq'>)</span>"
+     :separator " "
      :items (map r/render self)
      :value (pr-str self)}))
 
@@ -139,9 +133,9 @@
   r/Renderable
   (render [self]
     {:type :list-like
-     :open (span "clj-list" "(")
-     :close (span "clj-list" ")")
-     :separator [:span " "]
+     :open "<span class='clj-list'>(</span>"
+     :close "<span class='clj-list'>)</span>"
+     :separator " "
      :items (map r/render self)
      :value (pr-str self)}))
 
@@ -150,9 +144,9 @@
   r/Renderable
   (render [self]
     {:type :list-like
-     :open (span "clj-list" "(")
-     :close (span "clj-list" ")")
-     :separator [:span " "]
+     :open "<span class='clj-list'>(</span>"
+     :close "<span class='clj-list'>)</span>"
+     :separator " "
      :items (map r/render self)
      :value (pr-str self)}))
 
@@ -160,9 +154,9 @@
   r/Renderable
   (render [self]
     {:type :list-like
-     :open (span "clj-list" "(")
-     :close (span "clj-list" ")")
-     :separator [:span " "]
+     :open "<span class='clj-list'>(</span>"
+     :close "<span class='clj-list'>)</span>"
+     :separator " "
      :items (map r/render self)
      :value (pr-str self)}))
 
@@ -173,9 +167,9 @@
 (defn- render-map-entry
   [entry]
   {:type :list-like
-   :open nil
-   :close nil
-   :separator [:span " "]
+   :open ""
+   :close ""
+   :separator " "
    :items (map r/render entry)
    :value (pr-str entry)})
 
@@ -183,9 +177,9 @@
   r/Renderable
   (render [self]
     {:type :list-like
-     :open (span "clj-map" "{")
-     :close (span "clj-map" "}")
-     :separator [:span ", "]
+     :open "<span class='clj-map'>{</span>"
+     :close "<span class='clj-map'>}</span>"
+     :separator ", "
      :items (map render-map-entry self)
      :value (pr-str self)}))
 
@@ -194,9 +188,9 @@
   r/Renderable
   (render [self]
     {:type :list-like
-     :open (span "clj-set" "#{")
-     :close (span  "clj-set" "}")
-     :separator [:span " "]
+     :open "<span class='clj-set'>#{</span>"
+     :close "<span class='clj-set'>}</span>"
+     :separator " "
      :items (map r/render self)
      :value (pr-str self)}))
 
@@ -205,8 +199,8 @@
   r/Renderable
   (render [self]
     {:type :list-like
-     :open [:span {:class "clj-record"} (str "#" (pr-str (type self)) "{")]
-     :close (span "clj-record" "}")
-     :separator [:span " "]
+     :open (str "<span class='clj-record'>#" (pr-str (type self)) "{</span>")
+     :close "<span class='clj-record'>}</span>"
+     :separator " "
      :items (map render-map-entry self)
      :value (pr-str self)}))

@@ -2,8 +2,8 @@
 ;;;;
 ;;;; gorilla-repl is licenced to you under the MIT licence. See the file LICENCE.txt for full details.
 
-(ns gorilla-repl.vega
-  (:require [gorilla-renderable.core :as render]))
+(ns pinkgorilla.ui.vega
+  (:require [pinkgorilla.ui.gorilla-renderable :as render]))
 
 (defrecord VegaView [content])
 

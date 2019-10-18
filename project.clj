@@ -1,4 +1,4 @@
-(defproject pinkgorilla.ui.gorilla-renderable "1.0.5"
+(defproject pinkgorilla.ui.gorilla-renderable "2.0.7"
   :description "The protocol for custom rendering in gorilla REPL."
   :url "https://github.com/pink-gorilla/gorilla-renderable"
   :license {:name "MIT"}
@@ -9,6 +9,6 @@
                              :sign-releases false}]]
   
   :dependencies 
-  [[org.clojure/clojure "1.5.1"]])
+  [[org.clojure/clojure "1.9.0-alpha14"]])
 
 

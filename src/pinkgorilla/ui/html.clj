@@ -2,8 +2,9 @@
 ;;;;
 ;;;; gorilla-repl is licenced to you under the MIT licence. See the file LICENCE.txt for full details.
 
-(ns gorilla-repl.html
-  (:require [gorilla-renderable.core :as render]))
+(ns pinkgorilla.ui.html
+  (:require 
+   [pinkgorilla.ui.gorilla-renderable :as render]))
 
 (defrecord HtmlView [content])
 
