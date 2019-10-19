@@ -1,4 +1,4 @@
-(ns pinkgorilla.ui.mega
+(ns pinkgorilla.ui.vega2
   "plugin to render vega-charts in pink-gorilla
    (TODO: move to own library)
 "
@@ -63,8 +63,8 @@
    (embed spec {})))
 
 
-(defrecord Vega2 [specs])
-(extend-type Vega2
+(defrecord Vega [specs])
+(extend-type Vega
   Renderable
   (render [self]
    {:type :html
@@ -73,11 +73,11 @@
     }
    ))
 
-(defn vega2! [spec]
+(defn vega! [spec]
   "renders vega/vega-lite specification to a gorilla cell
    syntactical sugar only
    easier to use than to use (Vega. spec)"
-  (Vega2. spec))
+  (Vega. spec))
 
 
 

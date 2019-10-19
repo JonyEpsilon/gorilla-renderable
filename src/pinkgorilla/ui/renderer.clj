@@ -3,8 +3,9 @@
 ;;;; gorilla-repl is licenced to you under the MIT licence. See the file LICENCE.txt for full details.
 
 (ns pinkgorilla.ui.renderer
-  (:require [clojure.string :as string]
-            [pinkgorilla.ui.gorilla-renderable :as r]))
+  (:require 
+   [clojure.string :as string]
+   [pinkgorilla.ui.gorilla-renderable :as r]))
 
 
 ;;; Helper functions

@@ -4,11 +4,16 @@
 
 (ns pinkgorilla.ui.gorilla-renderable)
 
-;;; This is the protocol that a type must implement if it wants to customise its rendering in Gorilla. It defines a
-;;; single function, render, that should transform the value into a value that the front-end's renderer can display.
+;;; This is the protocol that a type must implement if it wants to customise its rendering in Gorilla.
+;;;  It defines a single function, render, that should transform the value into a value that the 
+;;; front-end's renderer can display.
+
 (defprotocol Renderable
   (render [self]))
 
+
+;; RenderableJS allows rendering of javascript code.
+;; Needed because script tags are not executed in react.
 
 ;; awb99: prefixes are necessary, because only "name" would overwrite clojure/name.
 ;; This should not happen, but it does.
