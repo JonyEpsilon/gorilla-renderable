@@ -11,7 +11,7 @@
 (def module-test "
   define([], function () {
       return {
-         version: 'module-test 0.0.2',
+         version: 'module-test 0.0.3',
          render: function (id_or_domel, data) {
             var domElement = id_or_domel;
             if (typeof id_or_domel === 'string' || id_or_domel instanceof String) {

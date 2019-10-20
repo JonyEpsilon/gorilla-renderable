@@ -20,18 +20,22 @@
 
 
 ;; UNUSED.
-(def vega-version "5.4.0")
-(def vega-lite-version "3.4.0")
-(def vega-embed-version "4.4.0")
+;(def vega-version "5.4.0")
+;(def vega-lite-version "3.4.0")
+;(def vega-embed-version "4.4.0")
 
 
+;; NOTES:
+;; Vega-Embed depends on Vega-Lite and Vega
+;; Vega-Lite depends on Vega
+;; The load order has to be VEGA, VEGA-LITE, VEGA-EMBED.
 
 
 
 (def module "
   define([], function () {
       return {
-         version: 'vega 0.0.2',
+         version: 'vega 0.0.3',
          render: function (id_or_domel, data) {
             var selector_or_domel = id_or_domel;
             if (typeof id_or_domel === 'string' || id_or_domel instanceof String) {
@@ -42,8 +46,8 @@
             }
             var dataJson = JSON.stringify(data)
             console.log ('vega-module data: ' + dataJson);
-            require(['vega-embed'], function(vegaEmbed) {
-              vegaEmbed(selector_or_domel, dataJson, {defaultStyle:true}).catch(console.warn);
+            require(['vega', 'vega-lite', 'vega-embed'], function(vega, vegaLite, vegaEmbed) {
+              vegaEmbed(selector_or_domel, data, {defaultStyle:true}).catch(console.warn);
               }, function(err) {
                 console.log('Failed to load');
             });
