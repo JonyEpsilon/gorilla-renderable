@@ -18,6 +18,9 @@
 ;; awb99: prefixes are necessary, because only "name" would overwrite clojure/name.
 ;; This should not happen, but it does.
 
+;; TODO: RenderableJS CANNOT BE USED, SIMPLY BECAUSE THE UI RENDERING ONLY KNOWS HOW TO DEAL
+;; WITH RENDERABLE. SO POSSIBLY WE NEED TO EXTEND RENDERABLEJS TO DEPEND ON RENDERABLE ???
+
 (defprotocol RenderableJS
   (js-name [self]) ; a unique name that identifies the JS renderer
   (js-dependencies [self]) ; a vector of dependency-urls that need to be loaded prior to rendering
