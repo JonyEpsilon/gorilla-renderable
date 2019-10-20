@@ -30,12 +30,15 @@
 ;; Vega-Lite depends on Vega
 ;; The load order has to be VEGA, VEGA-LITE, VEGA-EMBED.
 
+;; https://github.com/vega/vega-embed/issues/8
+;; https://github.com/biocore/qurro/commit/baf8542bd08dfdb5a078bca3f73cddbd79faef93
+
 
 
 (def module "
   define([], function () {
       return {
-         version: 'vega 0.0.3',
+         version: 'vega 0.0.4',
          render: function (id_or_domel, data) {
             var selector_or_domel = id_or_domel;
             if (typeof id_or_domel === 'string' || id_or_domel instanceof String) {
@@ -47,9 +50,11 @@
             var dataJson = JSON.stringify(data)
             console.log ('vega-module data: ' + dataJson);
             require(['vega', 'vega-lite', 'vega-embed'], function(vega, vegaLite, vegaEmbed) {
-              vegaEmbed(selector_or_domel, data, {defaultStyle:true}).catch(console.warn);
+              vegaEmbed(selector_or_domel, data, {defaultStyle:true}).catch(function(em) {
+                  console.log('Error in Rendering Vega Spec: ' + em)
+                 });
               }, function(err) {
-                console.log('Failed to load');
+                console.log('Vega-Embed failed to load');
             });
          }
       }
