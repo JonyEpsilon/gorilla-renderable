@@ -75,15 +75,19 @@
           }
        ;:value (pr-str self) ; DO NOT SET VALUE; this will fuckup loading. (at least in original gorilla)
        })
-    
     ))
+
+(defn rendered-to-spec [vega-renderable]
+  (get-in vega-renderable [:content :data] ))
 
 
 (comment
-  
-  
+    
   (render (vega! {:bongo 1}))
   
-  )
+  (rendered-to-spec 
+   (render (vega! {:bongo 1})))                   
+                     
+)                     
 
 
