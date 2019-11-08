@@ -34,16 +34,16 @@
   (render [self]
     (span-render self "clj-unkown")))
 
-;; nil values are a distinct thing of their own
+; nil values are a distinct thing of their own
 (extend-type nil
   r/Renderable
   (render [self]
     (span-render self "clj-nil")))
 
 (extend-type clojure.lang.Symbol
-  r/Renderable
-  (render [self]
-    (span-render self "clj-symbol")))
+ r/Renderable
+ (render [self]
+   (span-render self "clj-symbol")))
 
 (extend-type clojure.lang.Keyword
   r/Renderable
