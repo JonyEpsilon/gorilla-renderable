@@ -19,6 +19,7 @@
         :default  [#_:chrome #_:phantom :karma-phantom]
         :browsers [:chrome #_:firefox]
         :alias {:default [:chrome-headless]}
+        :karma {:config {"proxies" {"/out" "./out"}}}
         :paths
         {;; :phantom "phantomjs --web-security=false"
          :karma "./node_modules/karma/bin/karma --port=9881 --no-colors"}}
