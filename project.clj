@@ -19,14 +19,15 @@
         :default  [#_:chrome #_:phantom :karma-phantom]
         :browsers [:chrome #_:firefox]
         :alias {:default [:chrome-headless]}
-        :karma {:config {"proxies" {"/out" "./out"}}}
+        :karma {:config {"proxies" {"/target" "./target"}}}
         :paths
         {;; :phantom "phantomjs --web-security=false"
          :karma "./node_modules/karma/bin/karma --port=9881 --no-colors"}}
   :cljsbuild
   {:builds [{:id "test"
              :source-paths ["src" "test"]
-             :compiler {:output-to "resources/public/js/testable.js"
+             :compiler {:output-dir     "target/cljsbuild/js/doo"
+                        :output-to      "target/cljsbuild/js/doo-runner.js"
                         :main pinkgorilla.doo-runner
                         :optimizations :none}}]})
 
