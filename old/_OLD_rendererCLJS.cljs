@@ -7,21 +7,21 @@
 
 ;;; Helper functions
 
+;; Make a string safe to display as HTML
+(defn- escape-html
+  [str]
+  ;; this list of HTML replacements taken from underscore.js
+  ;; https://github.com/jashkenas/underscore
+  (string/escape str {\& "&amp;", \< "&lt;", \> "&gt;", \" "&quot;", \' "&#x27;"}))
 
 ;; A lot of things render to an HTML span, with a class to mark the type of thing. This helper constructs the rendered
 ;; value in that case.
-
 (defn- span-render
   [thing class]
-  {:type :html
-   :content [:span {:class class} (pr-str thing)]
-   :value (pr-str thing)})
-
-(defn- span
-  [class value]
-  [:span {:class class} value]
-  ;; "<span class='clj-lazy-seq'>)</span>"
-  )
+  (let [v (if (nil? thing) "" (pr-str thing))]
+    {:type :html
+     :content (str "<span class='" class "'>" (escape-html (pr-str thing)) "</span>")
+     :value v}))
 
 
 ;;; ** Renderers for basic Clojure forms **
@@ -32,38 +32,38 @@
 (extend-type nil
   Renderable
   (render [self]
-    (span-render self "clj-nil")))
+    (span-render self "cljs-nil")))
 
 (extend-type cljs.core/Keyword
   Renderable
   (render [self]
-    (span-render self "clj-keyword")))
+    (span-render self "cljs-keyword")))
 
 (extend-type cljs.core/Symbol
   Renderable
   (render [self]
-    (span-render self "clj-symbol")))
+    (span-render self "cljs-symbol")))
 
 
 (extend-type string
   Renderable
   (render [self]
-    (span-render self "clj-string")))
+    (span-render self "cljs-string")))
 
 #_(extend-type char
     Renderable
     (render [self]
-      (span-render self "clj-char")))
+      (span-render self "cljs-char")))
 
 (extend-type number
   Renderable
   (render [self]
-    (span-render self "clj-long")))
+    (span-render self "cljs-number")))
 
 (extend-type boolean
   Renderable
   (render [self]
-    (span-render self "clj-boolean")))
+    (span-render self "cljs-boolean")))
 
 
 
@@ -73,9 +73,9 @@
 (defn- render-map-entry
   [entry]
   {:type :list-like
-   :open nil
-   :close nil
-   :separator [:span " "]
+   :open ""
+   :close ""
+   :separator " "
    :items (map render entry)
    :value (pr-str entry)})
 
@@ -83,35 +83,11 @@
   Renderable
   (render [self]
     {:type :list-like
-     :open (span "clj-map" "{")
-     :close (span "clj-map" "{")
-     :separator [:span ", "]
+     :open "<span class='cljs-map'>{</span>"
+     :close "<span class='cljs-map'>}</span>"
+     :separator ", "
      :items (map render-map-entry self)
      :value (pr-str self)}))
-
-
-
-(extend-type cljs.core/LazySeq
-  Renderable
-  (render [self]
-    {:type :list-like
-     :open (span "clj-lazy-seq" "(")
-     :close (span "clj-lazy-seq" ")")
-     :separator [:span " "]
-     :items (map render self)
-     :value (pr-str self)}))
-
-
-(extend-type cljs.core/PersistentVector
-  Renderable
-  (render [self]
-    {:type :list-like
-     :open (span "clj-vector" "[")
-     :close (span "clj-vector" "]")
-     :separator [:span " "]
-     :items (map render self)
-     :value (pr-str self)}))
-
 
 ;; A default, catch-all renderer that takes anything we don't know what to do with and calls str on it.
 
@@ -128,8 +104,32 @@
       (span-render self "clj-unkown")))
 
 
+
+
+(extend-type cljs.core/LazySeq
+  Renderable
+  (render [self]
+    {:type :list-like
+     :open "<span class='cljs-lazy-seq'>(</span>"
+     :close "<span class='cljs-lazy-seq'>)</span>"
+     :separator " "
+     :items (map render self)
+     :value (pr-str self)}))
+
+
+(extend-type cljs.core/PersistentVector
+  Renderable
+  (render [self]
+    {:type :list-like
+     :open "<span class='cljs-vector'>[</span>"
+     :close "<span class='cljs-vector'>]</span>"
+     :separator " "
+     :items (map render self)
+     :value (pr-str self)}))
+
+
 (extend-type default
   Renderable
   (render [self]
     (println "unkown type: " (type self))
-    (span-render self "clj-unknown")))
+    (span-render self "cljs-unknown")))
