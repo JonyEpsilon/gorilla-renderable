@@ -113,6 +113,23 @@
      :value (pr-str self)}))
 
 
+
+
+(extend-type cljs.core/PersistentHashSet
+  Renderable
+  (render [self]
+    {:type :list-like
+     :open (span "clj-set" "#{")
+     :close (span  "clj-set" "}")
+     :separator [:span " "]
+     :items (map render self)
+     :value (pr-str self)}))
+
+
+;; This still needs to be implemented:
+;; cljs.core/Range
+
+
 ;; A default, catch-all renderer that takes anything we don't know what to do with and calls str on it.
 
 ;; https://grokbase.com/t/gg/clojure/121d2w4vhn/is-this-a-bug-extending-protocol-on-js-object
