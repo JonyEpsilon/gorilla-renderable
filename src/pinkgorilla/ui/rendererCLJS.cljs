@@ -84,7 +84,7 @@
   (render [self]
     {:type :list-like
      :open (span "clj-map" "{")
-     :close (span "clj-map" "{")
+     :close (span "clj-map" "}")
      :separator [:span ", "]
      :items (map render-map-entry self)
      :value (pr-str self)}))
