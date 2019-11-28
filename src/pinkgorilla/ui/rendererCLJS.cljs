@@ -129,7 +129,7 @@
 ;; This still needs to be implemented:
 ;; cljs.core/Range
 ;; cljs.core/Var
-
+;; cljs.core/List
 
 ;; A default, catch-all renderer that takes anything we don't know what to do with and calls str on it.
 
