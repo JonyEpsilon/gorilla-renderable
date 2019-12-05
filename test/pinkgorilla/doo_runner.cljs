@@ -3,16 +3,18 @@
    [doo.runner :refer-macros [doo-tests]]
 
    [pinkgorilla.ui.gorilla-renderable]
-   ;[pinkgorilla.ui.rendererCLJS]
-
+   
    [pinkgorilla.ui.core-test]
-   [pinkgorilla.ui.custom-renderable-test]))
+   [pinkgorilla.ui.custom-renderable-test]
+   [pinkgorilla.ui.to-reagent-test]
+   ))
 
 
 
 (doo-tests
  'pinkgorilla.ui.core-test
- 'pinkgorilla.ui.custom-renderable-test)
+ 'pinkgorilla.ui.custom-renderable-test
+ 'pinkgorilla.ui.to-reagent-test)
 
 
 ;(require '[pinkgorilla.ui.gorilla-renderable])

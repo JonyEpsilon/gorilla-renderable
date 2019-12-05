@@ -12,25 +12,25 @@
 (deftest renderable-nil
   (is (= (render nil)
          {:type :html
-          :content "<span class='cljs-nil'>nil</span>"
-          :value ""})))
+          :content [:span {:class "clj-nil"} "nil"]
+          :value "nil"})))
 
 (deftest renderable-keyword
   (is (= (render :test)
          {:type :html
-          :content "<span class='cljs-keyword'>:test</span>"
+          :content [:span {:class "clj-keyword"} ":test"]
           :value ":test"})))
 
 (deftest renderable-symbol
   (is (= (render (symbol "s"))
          {:type :html
-          :content "<span class='cljs-symbol'>s</span>"
+          :content [:span {:class "clj-symbol"} "s"]
           :value "s"})))
 
 (deftest renderable-string
   (is (= (render "s")   
          {:type :html
-          :content "<span class='cljs-string'>&quot;s&quot;</span>"
+          :content [:span {:class "clj-string"} "\"s\""]
           :value "\"s\""} )))
 
 #_(deftest renderable-char
@@ -43,13 +43,13 @@
 (deftest renderable-number
   (is (= (render 13)
          {:type :html
-          :content "<span class='cljs-number'>13</span>"
+          :content [:span {:class "clj-long"} "13"]
           :value "13"})))
 
 (deftest renderable-bool
   (is (= (render true)
          {:type :html
-          :content "<span class='cljs-boolean'>true</span>"
+          :content [:span {:class "clj-boolean"} "true" ]
           :value "true"})))
 
 ;; awb99: I am too lazy to implement this test, especially since the
@@ -68,6 +68,6 @@
   ;(println "type is: " (type u))
   (is (= (render u)
          {:type :html
-          :content "<span class='cljs-unknown'>#pinkgorilla.ui.core-test.MyRecord{:r 3}</span>"
+          :content [:span {:class "clj-unknown"} "#pinkgorilla.ui.core-test.MyRecord{:r 3}"]
           :value "#pinkgorilla.ui.core-test.MyRecord{:r 3}"})))
 
