@@ -1,6 +1,7 @@
 (ns pinkgorilla.ui.pinkie
   (:require
    [goog.object :as gobj]
+   [taoensso.timbre :refer-macros (info)]
    [reagent.core :as r :refer [atom]]
    [reagent.impl.template]))
 
@@ -27,11 +28,9 @@
 
 (defn resolve-function [s]
   (let [;pinkgorilla.output.reagentwidget (cljs.core/resolve (symbol widget-name)) ; this is what we want, but resolve is a macro
-        ;_ (info "resolving-function " s)
-        v (s custom-renderers)
-        ]
-    (if (nil? v) s v)
-    ))
+        _ (info "resolving-function " s)
+        v (s custom-renderers)]
+    (if (nil? v) s v)))
 
 (defn resolve-vector [x]
   (let [;_ (info "reagent function found: " x)
@@ -46,7 +45,7 @@
     ;a
     b))
 
-(defn- resolve-functions
+(defn resolve-functions
   "resolve function-as symbol to function references in the reagent-hickup-map.
    Leaves regular hiccup data unchanged."
   [reagent-hiccup-syntax]
