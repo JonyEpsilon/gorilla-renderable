@@ -29,7 +29,7 @@
 (defn resolve-function [s]
   (let [;pinkgorilla.output.reagentwidget (cljs.core/resolve (symbol widget-name)) ; this is what we want, but resolve is a macro
         _ (info "resolving-function " s)
-        v (s custom-renderers)
+        v (s @custom-renderers)
         _ (info "renderer found: " v)
         ]
     (if (nil? v) s v)))
