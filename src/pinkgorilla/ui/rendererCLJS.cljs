@@ -44,7 +44,9 @@
   (render [self]
     (span-render self "clj-symbol")))
 
-
+; would be cool to be able to use meta data to switch between
+; if meta ^:br is set, then convert \n to [:br] otherwise render the string as it is.
+; however clojure does not support meta data for strings
 (extend-type string
   Renderable
   (render [self]
