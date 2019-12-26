@@ -1,4 +1,4 @@
-(ns pinkgorilla.ui.text
+(ns pinkgorilla.ui.helper
   "plugin to render text in pink-gorilla"
   (:require
    [pinkgorilla.ui.gorilla-renderable :as render] ; define Renderable (which has render function)
