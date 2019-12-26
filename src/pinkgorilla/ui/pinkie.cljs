@@ -1,7 +1,7 @@
 (ns pinkgorilla.ui.pinkie
   (:require
    [goog.object :as gobj]
-   [taoensso.timbre :refer-macros (info)]
+   ;[taoensso.timbre :refer-macros (info)]
    [reagent.core :as r :refer [atom]]
    [reagent.impl.template]))
 
@@ -28,9 +28,9 @@
 
 (defn resolve-function [s]
   (let [;pinkgorilla.output.reagentwidget (cljs.core/resolve (symbol widget-name)) ; this is what we want, but resolve is a macro
-        _ (info "resolving-function " s)
+        ;_ (info "resolving-function " s)
         v (s @custom-renderers)
-        _ (info "renderer found: " v)
+        ;_ (info "renderer found: " v)
         ]
     (if (nil? v) s v)))
 
@@ -57,3 +57,6 @@
        (resolve-vector x)
        x))
    reagent-hiccup-syntax))
+
+
+
