@@ -1,5 +1,5 @@
 (ns pinkgorilla.ui.hiccup_renderer
-  (:require 
+  (:require
    [clojure.string :as string]
    [pinkgorilla.ui.gorilla-renderable :as r]))
 
@@ -7,6 +7,8 @@
 ;;; Helper functions
 
 ;; Make a string safe to display as HTML
+
+
 (defn- escape-html
   [str]
   ;; this list of HTML replacements taken from underscore.js
@@ -18,13 +20,13 @@
 (defn- span-render
   [thing class]
   {:type :html
-   :content [:span {:class class } (pr-str thing)]
+   :content [:span {:class class} (pr-str thing)]
    ;; (str "<span class='" class "'>" (escape-html (pr-str thing)) "</span>")
    :value (pr-str thing)})
 
 (defn- span
   [class value]
-  [:span {:class class } value ]
+  [:span {:class class} value]
   ;; "<span class='clj-lazy-seq'>)</span>"
   )
 
@@ -167,6 +169,8 @@
 ;; When we render a map we will map over its entries, which will yield key-value pairs represented as vectors. To render
 ;; the map we render each of these key-value pairs with this helper function. They are rendered as list-likes with no
 ;; bracketing. These will then be assembled in to a list-like for the whole map by the IPersistentMap render function.
+
+
 (defn- render-map-entry
   [entry]
   {:type :list-like
@@ -185,7 +189,6 @@
      :separator [:span ", "]
      :items (map render-map-entry self)
      :value (pr-str self)}))
-
 
 (extend-type clojure.lang.IPersistentSet
   r/Renderable

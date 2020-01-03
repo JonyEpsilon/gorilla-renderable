@@ -2,10 +2,8 @@
   "plugin to render widgets in pink-gorilla
    widgets are simply reagent components"
   (:require
-    [pinkgorilla.ui.gorilla-renderable :refer :all]         ; define Renderable (which has render function)
-    [clojure.walk :refer [prewalk]]
-    ))
-
+   [pinkgorilla.ui.gorilla-renderable :refer :all]         ; define Renderable (which has render function)
+   [clojure.walk :refer [prewalk]]))
 
 (defn reagent! [r]
   "renders a reagent widget"
@@ -17,8 +15,6 @@
        ;:value (pr-str self) ; DO NOT SET VALUE; this will fuckup loading. (at least in original gorilla)
        })))
 
-
-
 (defn R! [r]
   "renders a reagent widget"
   (reify Renderable
@@ -28,11 +24,9 @@
                  :map-kewords true}
        :map-keywords true
        :reagent r
-       :value   (pr-str r) 
+       :value   (pr-str r)
        ;:value (pr-str self) ; DO NOT SET VALUE; this will fuckup loading. (at least in original gorilla)
        })))
-
-
 
 (comment
   (render (reagent! '[:h1 "hello, world"]))
@@ -49,7 +43,7 @@
     (coll? x))
 
   (clojure.walk/prewalk
-    #(if (check %) (inc %) %) matrix)
+   #(if (check %) (inc %) %) matrix)
 
   (def x '[:div {:style "asdf"}
            [:h1 (str "hello world" (+ 1 1))]

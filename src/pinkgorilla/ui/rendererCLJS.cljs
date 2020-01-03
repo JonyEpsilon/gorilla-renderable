@@ -11,6 +11,7 @@
 ;; A lot of things render to an HTML span, with a class to mark the type of thing. This helper constructs the rendered
 ;; value in that case.
 
+
 (defn- span-render
   [thing class]
   {:type :html
@@ -29,6 +30,8 @@
 
 
 ; nil values are a distinct thing of their own
+
+
 (extend-type nil
   Renderable
   (render [self]
@@ -72,6 +75,8 @@
 ;; When we render a map we will map over its entries, which will yield key-value pairs represented as vectors. To render
 ;; the map we render each of these key-value pairs with this helper function. They are rendered as list-likes with no
 ;; bracketing. These will then be assembled in to a list-like for the whole map by the IPersistentMap render function.
+
+
 (defn- render-map-entry
   [entry]
   {:type :list-like
@@ -91,8 +96,6 @@
      :items (map render-map-entry self)
      :value (pr-str self)}))
 
-
-
 (extend-type cljs.core/LazySeq
   Renderable
   (render [self]
@@ -103,7 +106,6 @@
      :items (map render self)
      :value (pr-str self)}))
 
-
 (extend-type cljs.core/PersistentVector
   Renderable
   (render [self]
@@ -113,9 +115,6 @@
      :separator [:span " "]
      :items (map render self)
      :value (pr-str self)}))
-
-
-
 
 (extend-type cljs.core/PersistentHashSet
   Renderable
@@ -143,11 +142,11 @@
 ;; provide default protocol implementations as we do in Clojure w/o fear of
 ;; conflicts with JavaScript libraries.
 
+
 #_(extend-type js/Object
     Renderable
     (render [self]
       (span-render self "clj-unkown")))
-
 
 (extend-type default
   Renderable

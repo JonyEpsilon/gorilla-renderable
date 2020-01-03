@@ -3,12 +3,12 @@
 ;;;; gorilla-repl is licenced to you under the MIT licence. See the file LICENCE.txt for full details.
 
 (ns pinkgorilla.ui.image
-  (:import 
+  (:import
    [java.awt Image]
    [java.awt.image BufferedImage]
    [java.io ByteArrayOutputStream]
    [javax.imageio ImageIO])
-  (:require 
+  (:require
    [clojure.data.codec.base64 :as b64]
    [clojure.string :as string]
    [pinkgorilla.ui.gorilla-renderable :as render]))
@@ -25,10 +25,10 @@
 (defrecord ImageView [image alt type width height]
   render/Renderable
   (render [{:keys [image alt type width height]}]
-      {:type :html
-       :content (format "<img src=\"data:image/%1$s;base64,%2$s\" width=\"%3$s\" height=\"%4$s\" alt=\"%5$s\" />"
-                        type (String. (b64/encode (image-to-bytes image type width height))) width height alt)
-       :value (pr-str image)}))
+    {:type :html
+     :content (format "<img src=\"data:image/%1$s;base64,%2$s\" width=\"%3$s\" height=\"%4$s\" alt=\"%5$s\" />"
+                      type (String. (b64/encode (image-to-bytes image type width height))) width height alt)
+     :value (pr-str image)}))
 
 (defn image-view [^BufferedImage image & {:keys [alt type width height]}]
   (let [alt (or alt "")
@@ -36,8 +36,8 @@
         iw (.getWidth image)
         ih (.getHeight image)
         [w h] (cond
-               (and width height) [(int width) (int height)]
-               width [(int width) (int (* (/ width iw) ih))]
-               height [(int (* (/ height ih) iw)) (int height)]
-               :else [iw ih])]
+                (and width height) [(int width) (int height)]
+                width [(int width) (int (* (/ width iw) ih))]
+                height [(int (* (/ height ih) iw)) (int height)]
+                :else [iw ih])]
     (ImageView. image alt type w h)))

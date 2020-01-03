@@ -1,6 +1,6 @@
 (ns pinkgorilla.ui.highcharts
   "plugin to render vega-charts in pink-gorilla"
-  (:require 
+  (:require
    [pinkgorilla.ui.gorilla-renderable :refer :all] ; define Renderable (which has render function)
    [pinkgorilla.ui.module-test :refer [module-test]] ;; simple JSON dumper for testing
    ))
@@ -36,26 +36,19 @@
   });
 ")
 
-
-
 (defn highchart! [spec]
   "renders highchart spec to a gorilla cell"
   (reify Renderable
     (render [_]
       {:type :jsscript
-       :content 
-         {:data spec
+       :content
+       {:data spec
           ;:module module-test
-          :module module
-          }
+        :module module}
        ;:value (pr-str self) ; DO NOT SET VALUE; this will fuckup loading. (at least in original gorilla)
-       })
-    
-    ))
-
+       })))
 
 (comment
-  (render (highchart! {:bongo 1}))
-)
+  (render (highchart! {:bongo 1})))
 
 

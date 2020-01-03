@@ -3,13 +3,10 @@
    [doo.runner :refer-macros [doo-tests]]
 
    [pinkgorilla.ui.gorilla-renderable]
-   
+
    [pinkgorilla.ui.core-test]
    [pinkgorilla.ui.custom-renderable-test]
-   [pinkgorilla.ui.to-reagent-test]
-   ))
-
-
+   [pinkgorilla.ui.to-reagent-test]))
 
 (doo-tests
  'pinkgorilla.ui.core-test

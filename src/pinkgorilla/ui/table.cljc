@@ -3,7 +3,7 @@
 ;;;; gorilla-repl is licenced to you under the MIT licence. See the file LICENCE.txt for full details.
 
 (ns pinkgorilla.ui.table
-  (:require 
+  (:require
    [pinkgorilla.ui.gorilla-renderable :as render]))
 
 (defrecord TableView [contents opts])

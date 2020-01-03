@@ -1,7 +1,7 @@
 (ns pinkgorilla.ui.hiccup
   "plugin to render hiccup-style html in pink-gorilla
    (TODO: move to own library)"
-  (:require 
+  (:require
    [hiccup.core]
    [hiccup.page]
    [pinkgorilla.ui.gorilla-renderable :refer :all] ; define Renderable (which has render function)
@@ -45,5 +45,4 @@
 
 
 (comment
-  (render (html! [:h1 "hello"]))
-  )
+  (render (html! [:h1 "hello"])))

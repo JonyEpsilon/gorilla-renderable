@@ -28,7 +28,6 @@
   (is (= (pr-str (Bongo. {:a 1 :b "2"})) "#pinkgorilla.ui.custom-renderable-test.Bongo{:specs {:a 1, :b \"2\"}}"))
   (is (= (renderable/render (Bongo. {:a 1 :b "2"})) {:type :html :content {:a 1 :b "2"}})))
 
-
 (deftest renderable-custom
   (is (= (render (Bongo. 7))
          {:type :html

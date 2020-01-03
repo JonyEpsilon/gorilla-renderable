@@ -4,13 +4,9 @@
 
 (defmulti keyword-to-reagent identity)
 
-
 (defn unknown-renderer [kw & p]
-  [:p (str "Unknown Renderer: " kw)]
-  )
-
+  [:p (str "Unknown Renderer: " kw)])
 
 (defmethod keyword-to-reagent :default [kw &p]
-   unknown-renderer
-  )
+  unknown-renderer)
 

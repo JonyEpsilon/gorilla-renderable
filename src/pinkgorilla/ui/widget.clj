@@ -1,25 +1,19 @@
 (ns pinkgorilla.ui.widget
   "plugin to render widgets in pink-gorilla
    widgets are simply reagent components"
-  (:require 
+  (:require
    [pinkgorilla.ui.gorilla-renderable :refer :all] ; define Renderable (which has render function)
    ))
-
 
 (defn widget! [widget-name & [initial-state]]
   "renders a reagent widget"
   (reify Renderable
     (render [_]
       {:type :widget
-       :content {:widget widget-name 
+       :content {:widget widget-name
                  :initial-state initial-state}
        ;:value (pr-str self) ; DO NOT SET VALUE; this will fuckup loading. (at least in original gorilla)
        })))
 
-
-
-
 (comment
-  (render (widget! "widget.hello"))
-  
- )
+  (render (widget! "widget.hello")))
