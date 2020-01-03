@@ -26,9 +26,11 @@
       {:type    :reagent-cljs
        :content {:reagent r
                  :map-kewords true}
+       :map-keywords true
+       :reagent r
        :value   (pr-str r) 
        ;:value (pr-str self) ; DO NOT SET VALUE; this will fuckup loading. (at least in original gorilla)
-                 })))
+       })))
 
 
 
