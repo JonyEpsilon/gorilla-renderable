@@ -3,9 +3,10 @@
   :url "https://github.com/pink-gorilla/gorilla-renderable"
   :license {:name "MIT"}
   ;:deploy-repositories [["releases" :clojars]]
-  :repositories [["clojars" {:url           "https://clojars.org/repo"
-                             :username      "pinkgorillawb"
-                             :sign-releases false}]]
+  :deploy-repositories [["releases" {:url "https://clojars.org/repo"
+                                     :username :env/release_username
+                                     :password :env/release_password
+                                     :sign-releases false}]]
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [org.clojure/clojurescript "1.10.520"]
                  [org.clojure/data.json "0.2.6"]            ; used by old vega renderer
