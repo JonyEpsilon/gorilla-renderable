@@ -1,4 +1,4 @@
-(defproject org.pinkgorilla/gorilla-renderable "2.1.17"
+(defproject org.pinkgorilla/gorilla-renderable "2.1.18"
   :description "The protocol for custom rendering in Pink Gorilla Notebook."
   :url "https://github.com/pink-gorilla/gorilla-renderable"
   :license {:name "MIT"}
@@ -10,7 +10,10 @@
   [[org.clojure/clojure "1.10.1"]
    [org.clojure/clojurescript "1.10.520"]
    [org.clojure/data.json "0.2.6"] ; used by old vega renderer
-   [hiccup "1.0.5"]] ; used in hiccup rendering
+   [hiccup "1.0.5"]
+   [reagent "0.8.1"
+    :exclusions [org.clojure/tools.reader]] ; needed by pinkie r/atom
+   ] ; used in hiccup rendering
   
   :source-paths ["src"]
   :test-paths ["test"]
