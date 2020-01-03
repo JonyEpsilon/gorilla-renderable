@@ -1,11 +1,11 @@
-# Pink Gorilla Middleware [![GitHub Actions status |pink-gorilla/gorilla-renderable](https://github.com/pink-gorilla/gorilla-renderable/workflows/CI/badge.svg)](https://github.com/pink-gorilla/gorilla-renderable/actions?workflow=CI)
+# Pink Gorilla Middleware [![GitHub Actions status |pink-gorilla/gorilla-renderable](https://github.com/pink-gorilla/gorilla-renderable/workflows/CI/badge.svg)](https://github.com/pink-gorilla/gorilla-renderable/actions?workflow=CI)[![Clojars Project](https://img.shields.io/clojars/v/org.pinkgorilla/gorilla-renderable.svg)](https://clojars.org/org.pinkgorilla/gorilla-renderable)
 
-- this project is part of [PinkGorilla Notebook](https://github.com/pink-gorilla/gorilla-notebook)
-- data structures from clojure/clojurescript have to be converted to some kind
+- This project is part of [PinkGorilla Notebook](https://github.com/pink-gorilla/gorilla-notebook)
+- Data structures from clojure/clojurescript have to be converted to some kind
 of visual repesentation so that the notebook can render them
-- for all clojure/clojurescript datatypes default renderers are defined here
-- custom data-types can implement the renderable protocol 
-- the notebook receves the render-datastructure and renders it to the notebook cell.
+- For all clojure/clojurescript datatypes default renderers are defined here
+- Custom data-types can implement the renderable protocol 
+- The notebook receves the render-datastructure and renders it to the notebook cell.
 
 ```
 (defprotocol Renderable
@@ -25,7 +25,7 @@ NOT IMPLEMENTED
 
 Clojurescript:
 ```
-lein doo
+TODO
 ```
 
 

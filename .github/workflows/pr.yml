@@ -42,4 +42,7 @@ jobs:
     - name: Check formatting
       run: lein cljfmt check
     - name: Run tests
-      run: lein test
+      run: |
+        lein test
+        lein build-shadow-ci
+        ./node_modules/karma/bin/karma start --single-run

@@ -12,3 +12,4 @@ pom.xml.asc
 /.cljs_node_repl
 /node_modules
 /resources
+.shadow-cljs/*
