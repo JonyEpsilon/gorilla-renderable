@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Cache dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/project.clj') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+    - name: Install dependencies
+      run: |
+        lein deps
+      # echo "github ref ${{ github.ref }}"
+      # refs/heads/master
+    - name: Check formatting
+      run: lein cljfmt check
+    - name: Run tests
+      run: lein test
+    - name: Release
+      # if: github.event_name == 'push'
+      env:
+        RELEASE_USERNAME: ${{ secrets.ReleaseUsername }}
+        RELEASE_PASSWORD: ${{ secrets.ReleasePassword }}
+      run: |
+        git config --global user.email "ci@pinkgorilla.org"
+        git config --global user.name "CI/CD"
+        lein release
+  #release:
+  #  runs-on: ubuntu-latest
+  #  needs: build
+  #  if: github.event_name == 'push'
+  #  steps:
+  #  - name: Release
+  #    run: lein release
