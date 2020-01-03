@@ -2,12 +2,12 @@
   (:require
    [cljs.test :refer-macros [async deftest is testing]]
    [pinkgorilla.ui.gorilla-renderable :refer [render]]
-   [pinkgorilla.ui.rendererCLJS]
- ))
+   [pinkgorilla.ui.rendererCLJS]))
 
 ; Type Tests	array? fn? number? object? string?
 ; instance?
 ; 	fn?  ifn?
+
 
 (deftest renderable-nil
   (is (= (render nil)
@@ -28,17 +28,17 @@
           :value "s"})))
 
 (deftest renderable-string
-  (is (= (render "s")   
+  (is (= (render "s")
          {:type :html
           :content [:span {:class "clj-string"} "\"s\""]
-          :value "\"s\""} )))
+          :value "\"s\""})))
 
 #_(deftest renderable-char
-  (println "type is: " (type (char "c")))
-  (is (= (render (char "c"))
-         {:type :html
-          :content "<span class='cljs-char'>&quot;c&quot;</span>"
-          :value "\"c\""})))
+    (println "type is: " (type (char "c")))
+    (is (= (render (char "c"))
+           {:type :html
+            :content "<span class='cljs-char'>&quot;c&quot;</span>"
+            :value "\"c\""})))
 
 (deftest renderable-number
   (is (= (render 13)
@@ -49,17 +49,16 @@
 (deftest renderable-bool
   (is (= (render true)
          {:type :html
-          :content [:span {:class "clj-boolean"} "true" ]
+          :content [:span {:class "clj-boolean"} "true"]
           :value "true"})))
 
 ;; awb99: I am too lazy to implement this test, especially since the
 ;; list-alike rendering needs refactoring
 #_(deftest renderable-map
-  (is (= (render {:a 1 :b 2})
-         {:type :html
-          :content "<span class='cljs-map'>true</span>"
-          :value "true"})))
-
+    (is (= (render {:a 1 :b 2})
+           {:type :html
+            :content "<span class='cljs-map'>true</span>"
+            :value "true"})))
 
 (defrecord MyRecord [r])
 

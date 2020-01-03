@@ -3,10 +3,9 @@
    module-test is a very simple sample that just renders the data as
    JSON to the dom node that is passed.
    In early state component development this is helpful."
-    (:require 
-     [pinkgorilla.ui.gorilla-renderable :refer :all] ; define Renderable (which has render function
-     ))
-
+  (:require
+   [pinkgorilla.ui.gorilla-renderable :refer :all] ; define Renderable (which has render function
+   ))
 
 (def module-test "
   define([], function () {

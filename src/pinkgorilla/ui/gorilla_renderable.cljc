@@ -17,9 +17,9 @@
 ;; TODO: RenderableJS CANNOT BE USED, SIMPLY BECAUSE THE UI RENDERING ONLY KNOWS HOW TO DEAL
 ;; WITH RENDERABLE. SO POSSIBLY WE NEED TO EXTEND RENDERABLEJS TO DEPEND ON RENDERABLE ???
 
+
 (defprotocol RenderableJS
   (js-name [self]) ; a unique name that identifies the JS renderer
   (js-dependencies [self]) ; a vector of dependency-urls that need to be loaded prior to rendering
   (js-render [self]) ; javascript function body that will do the render part
-  (js-cleanup [self])
-  ) ; javascript function body that will do cleanup when the render output is removed.
+  (js-cleanup [self])) ; javascript function body that will do cleanup when the render output is removed.

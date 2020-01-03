@@ -1,4 +1,4 @@
-# Pinkgorilla renderable
+# Pink Gorilla Middleware [![GitHub Actions status |pink-gorilla/gorilla-renderable](https://github.com/pink-gorilla/gorilla-renderable/workflows/CI/badge.svg)](https://github.com/pink-gorilla/gorilla-renderable/actions?workflow=CI)
 
 - this project is part of [PinkGorilla Notebook](https://github.com/pink-gorilla/gorilla-notebook)
 - data structures from clojure/clojurescript have to be converted to some kind
