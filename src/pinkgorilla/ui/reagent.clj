@@ -19,6 +19,19 @@
 
 
 
+(defn R! [r]
+  "renders a reagent widget"
+  (reify Renderable
+    (render [_]
+      {:type    :reagent-cljs
+       :content {:reagent r
+                 :map-kewords true}
+       :value   (pr-str r) 
+       ;:value (pr-str self) ; DO NOT SET VALUE; this will fuckup loading. (at least in original gorilla)
+                 })))
+
+
+
 (comment
   (render (reagent! '[:h1 "hello, world"]))
   (render (reagent! '[clock "hello, world"]))
