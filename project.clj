@@ -1,4 +1,4 @@
-(defproject org.pinkgorilla/gorilla-renderable "3.0.0-SNAPSHOT"
+(defproject org.pinkgorilla/gorilla-renderable "3.0.0"
   :description "The protocol for custom rendering in Pink Gorilla Notebook."
   :url "https://github.com/pink-gorilla/gorilla-renderable"
   :license {:name "MIT"}
