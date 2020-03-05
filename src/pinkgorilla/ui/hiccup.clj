@@ -23,26 +23,5 @@
        })))
 
 
-;; OLD CODE FOLLOWS
-;; This code does exactly the same as above, except that it defines and overrides Hiccup record.
-;; 2019 10 16 awb99: is there any reason to keep this, or should it just be removed?
-
-; (defrecord Hiccup [h])
-; (extend-type Hiccup
-;  Renderable
-; (render [h] ; render must return {:type :content}
-;   {:type :html
-;     :content (hiccup.core/html (:h h))
-;     ;:value (pr-str self) ; DO NOT SET VALUE; this will fuckup loading. (at least in original gorilla)
-;     }))
-;
-;(defn old-html! [h]
-;  "renders hiccup-html to a gorilla cell
-;   syntactical sugar only
-;   easier to use than to use (Hiccup. h)"
-;  (Hiccup. h)
-;  )
-
-
 (comment
   (render (html! [:h1 "hello"])))
