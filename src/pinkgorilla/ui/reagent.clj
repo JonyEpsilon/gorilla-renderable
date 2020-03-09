@@ -5,16 +5,6 @@
    [pinkgorilla.ui.gorilla-renderable :refer :all]         ; define Renderable (which has render function)
    [clojure.walk :refer [prewalk]]))
 
-(defn reagent! [r]
-  "renders a reagent widget"
-  (reify Renderable
-    (render [_]
-      {:type    :reagent
-       :content r
-       :value   (pr-str r)
-       ;:value (pr-str self) ; DO NOT SET VALUE; this will fuckup loading. (at least in original gorilla)
-       })))
-
 (defn R! [r]
   "renders a reagent widget"
   (reify Renderable

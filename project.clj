@@ -11,7 +11,7 @@
                  ;; TODO: Still needed? Used by old vega renderer
                  [org.clojure/data.json "0.2.6"]
                  [hiccup "1.0.5"]]
-  
+
   :profiles {:dev {:dependencies [[clj-kondo "2019.11.23"]]
                    :plugins      [[lein-cljfmt "0.6.6"]
                                   [lein-cloverage "1.1.2"]]
@@ -29,7 +29,7 @@
 
   ;; TODO: prep tasks breaks alias???
   ;; :prep-tasks ["build-shadow-ci"]
-  
+
   :aliases {"bump-version" ["change" "version" "leiningen.release/bump-version"]}
 
   :release-tasks [["vcs" "assert-committed"]
