@@ -1,4 +1,5 @@
 (ns pinkgorilla.ui.hiccup_renderer
+  "converts clojure values to html representation"
   (:require
    [clojure.string :as string]
    [pinkgorilla.ui.gorilla-renderable :as r]))
