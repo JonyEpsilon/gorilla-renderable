@@ -22,6 +22,5 @@
        ;:value (pr-str self) ; DO NOT SET VALUE; this will fuckup loading. (at least in original gorilla)
        })))
 
-
 (comment
   (render (html! [:h1 "hello"])))

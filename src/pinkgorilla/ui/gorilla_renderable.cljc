@@ -7,8 +7,6 @@
 (defprotocol Renderable
   (render [self]))
 
-
-
 (defn render-renderable
   "rendering via the Renderable protocol (needs renderable project)
    (users can define their own render implementations)"
@@ -17,7 +15,6 @@
         ;_ (println "response: " response)
         ]
     response))
-
 
 (defn render-renderable-meta
   "rendering via the Renderable protocol (needs renderable project)
