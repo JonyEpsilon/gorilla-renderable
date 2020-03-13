@@ -9,11 +9,10 @@
   "renders a reagent widget"
   (reify Renderable
     (render [_]
-      {:type    :reagent-cljs
-       :content {:reagent r
-                 :map-kewords true}
-       :map-keywords true
-       :reagent r
+      {:type    :reagent
+       :content {:hiccup r
+                 :map-kewords true
+                 :widget  true}
        :value   (pr-str r)
        ;:value (pr-str self) ; DO NOT SET VALUE; this will fuckup loading. (at least in original gorilla)
        })))
