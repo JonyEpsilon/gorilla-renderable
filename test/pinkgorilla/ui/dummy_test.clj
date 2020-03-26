@@ -1,7 +1,6 @@
-(ns pinkgorilla.ui.core-test
-  (:require [clojure.test :refer :all]
-    ;; at least force compilation for now
-            [pinkgorilla.ui.hiccup :as hiccup]))
+(ns pinkgorilla.ui.dummy-test
+  (:require
+   [clojure.test :refer :all]))
 
 (defn my-test-fixture
   [f]

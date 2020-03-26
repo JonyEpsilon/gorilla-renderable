@@ -20,12 +20,7 @@ Clojure/Clojurescript Data => (render) => Renderable DataStructure => (render) =
 
 Clojure:
 ```
-NOT IMPLEMENTED
-```
-
-Clojurescript:
-```
-TODO
+lein test
 ```
 
 
