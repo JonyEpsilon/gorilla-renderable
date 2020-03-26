@@ -33,12 +33,11 @@
           :content [:span {:class "clj-string"} "\"s\""]
           :value "\"s\""})))
 
-#_(deftest renderable-char
-    (println "type is: " (type (char "c")))
-    (is (= (render (char "c"))
-           {:type :html
-            :content "<span class='cljs-char'>&quot;c&quot;</span>"
-            :value "\"c\""})))
+(deftest renderable-char
+  (is (= (render \c)
+         {:type :html
+          :content [:span {:class "clj-char"} "\\c"]
+          :value "\\c"})))
 
 (deftest renderable-number
   (is (= (render 13)
@@ -67,9 +66,9 @@
 
 
 #_(deftest renderable-catch-all
-    (def u (MyRecord. 3))
+    (let [u (MyRecord. 3)]
   ;(println "type is: " (type u))
-    (is (= (render u)
-           {:type :html
-            :content [:span {:class "clj-unknown"} "#pinkgorilla.ui.core-test.MyRecord{:r 3}"]
-            :value "#pinkgorilla.ui.core-test.MyRecord{:r 3}"})))
+      (is (= (render u)
+             {:type :html
+              :content [:span {:class "clj-unknown"} "#pinkgorilla.ui.core-test.MyRecord{:r 3}"]
+              :value "#pinkgorilla.ui.core-test.MyRecord{:r 3}"}))))
