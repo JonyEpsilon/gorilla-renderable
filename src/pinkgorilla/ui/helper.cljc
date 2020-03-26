@@ -36,17 +36,9 @@
   ^:R [:html html-as-string])
 
 
-;; old legacy notebook helper
-
-
-(defn html-view [content]
-  (reify Renderable
-    (render [_]
-      {:type :html
-       :content content
-       :value (pr-str content)})))
 
 ;; table-view
+
 
 (defrecord TableView [contents opts])
 
