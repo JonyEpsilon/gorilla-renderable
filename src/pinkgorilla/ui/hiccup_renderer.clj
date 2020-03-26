@@ -1,39 +1,30 @@
 (ns pinkgorilla.ui.hiccup_renderer
   "converts clojure values to html representation"
   (:require
-   [clojure.string :as string]
    [pinkgorilla.ui.gorilla-renderable :refer [Renderable render]]))
 
 
-;;; Helper functions
+;; helper functions
 
-;; Make a string safe to display as HTML
-
-
-(defn- escape-html
-  [str]
-  ;; this list of HTML replacements taken from underscore.js
-  ;; https://github.com/jashkenas/underscore
-  (string/escape str {\& "&amp;", \< "&lt;", \> "&gt;", \" "&quot;", \' "&#x27;"}))
-
-;; A lot of things render to an HTML span, with a class to mark the type of thing. This helper constructs the rendered
+;; A lot of things render to an HTML span, with a class to mark the type of thing. 
+;; This helper constructs the rendered
 ;; value in that case.
+
+
 (defn- span-render
   [thing class]
   {:type :html
    :content [:span {:class class} (pr-str thing)]
-   ;; (str "<span class='" class "'>" (escape-html (pr-str thing)) "</span>")
    :value (pr-str thing)})
 
-(defn- span
+; span is used by
+(defn- span-render-no-value
   [class value]
-  [:span {:class class} value]
-  ;; "<span class='clj-lazy-seq'>)</span>"
-  )
+  [:span {:class class} value])
 
-;;; ** Renderers for basic Clojure forms **
+;; Renderers for basic Clojure forms **
 
-;; A default, catch-all renderer that takes anything we don't know what to do with and calls str on it.
+;; A default, catch-all renderer that takes anything we don't know what to do with
 (extend-type Object
   Renderable
   (render [self]
@@ -120,12 +111,14 @@
   (render [self]
     (span-render self "clj-class")))
 
+;; renderers for collection of items
+
 (extend-type clojure.lang.IPersistentVector
   Renderable
   (render [self]
     {:type :list-like
-     :open (span "clj-vector" "[")
-     :close (span "clj-vector" "]")
+     :open (span-render-no-value "clj-vector" "[")
+     :close (span-render-no-value "clj-vector" "]")
      :separator [:span " "]
      :items (map render self)
      :value (pr-str self)}))
@@ -134,8 +127,8 @@
   Renderable
   (render [self]
     {:type :list-like
-     :open (span "clj-lazy-seq" "(")
-     :close (span "clj-lazy-seq" ")")
+     :open (span-render-no-value "clj-lazy-seq" "(")
+     :close (span-render-no-value "clj-lazy-seq" ")")
      :separator [:span " "]
      :items (map render self)
      :value (pr-str self)}))
@@ -144,8 +137,8 @@
   Renderable
   (render [self]
     {:type :list-like
-     :open (span "clj-list" "(")
-     :close (span "clj-list" ")")
+     :open (span-render-no-value "clj-list" "(")
+     :close (span-render-no-value "clj-list" ")")
      :separator [:span " "]
      :items (map render self)
      :value (pr-str self)}))
@@ -155,8 +148,8 @@
   Renderable
   (render [self]
     {:type :list-like
-     :open (span "clj-list" "(")
-     :close (span "clj-list" ")")
+     :open (span-render-no-value "clj-list" "(")
+     :close (span-render-no-value "clj-list" ")")
      :separator [:span " "]
      :items (map render self)
      :value (pr-str self)}))
@@ -165,8 +158,8 @@
   Renderable
   (render [self]
     {:type :list-like
-     :open (span "clj-list" "(")
-     :close (span "clj-list" ")")
+     :open (span-render-no-value "clj-list" "(")
+     :close (span-render-no-value "clj-list" ")")
      :separator [:span " "]
      :items (map render self)
      :value (pr-str self)}))
@@ -190,8 +183,8 @@
   Renderable
   (render [self]
     {:type :list-like
-     :open (span "clj-map" "{")
-     :close (span "clj-map" "}")
+     :open (span-render-no-value "clj-map" "{")
+     :close (span-render-no-value "clj-map" "}")
      :separator [:span ", "]
      :items (map render-map-entry self)
      :value (pr-str self)}))
@@ -200,8 +193,8 @@
   Renderable
   (render [self]
     {:type :list-like
-     :open (span "clj-set" "#{")
-     :close (span  "clj-set" "}")
+     :open (span-render-no-value "clj-set" "#{")
+     :close (span-render-no-value  "clj-set" "}")
      :separator [:span " "]
      :items (map render self)
      :value (pr-str self)}))
@@ -212,7 +205,7 @@
   (render [self]
     {:type :list-like
      :open [:span {:class "clj-record"} (str "#" (pr-str (type self)) "{")]
-     :close (span "clj-record" "}")
+     :close (span-render-no-value "clj-record" "}")
      :separator [:span " "]
      :items (map render-map-entry self)
      :value (pr-str self)}))
