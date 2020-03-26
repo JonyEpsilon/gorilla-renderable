@@ -1,8 +1,5 @@
-;;;; This file is part of gorilla-repl. Copyright (C) 2014-, Jony Hudson
-;;;;
-;;;; gorilla-repl is licenced to you under the MIT licence. See the file LICENCE.txt for full details.
-
 (ns pinkgorilla.ui.image
+  "Render BufferedImage objects"
   (:import
    [java.awt Image]
    [java.awt.image BufferedImage]
@@ -11,7 +8,7 @@
   (:require
    [clojure.data.codec.base64 :as b64]
    [clojure.string :as string]
-   [pinkgorilla.ui.gorilla-renderable :as render]))
+   [pinkgorilla.ui.gorilla-renderable :refer [Renderable render]]))
 
 (defn image-to-bytes [^Image image ^String type width height]
   (let [bi (BufferedImage. width height (if (#{"png" "gif"} type)
@@ -23,7 +20,7 @@
     (.toByteArray baos)))
 
 (defrecord ImageView [image alt type width height]
-  render/Renderable
+  Renderable
   (render [{:keys [image alt type width height]}]
     {:type :html
      :content (format "<img src=\"data:image/%1$s;base64,%2$s\" width=\"%3$s\" height=\"%4$s\" alt=\"%5$s\" />"

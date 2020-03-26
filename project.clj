@@ -2,15 +2,11 @@
   :description "The protocol for custom rendering in Pink Gorilla Notebook."
   :url "https://github.com/pink-gorilla/gorilla-renderable"
   :license {:name "MIT"}
-  ;:deploy-repositories [["releases" :clojars]]
   :deploy-repositories [["releases" {:url "https://clojars.org/repo"
                                      :username :env/release_username
                                      :password :env/release_password
                                      :sign-releases false}]]
-  :dependencies [[org.clojure/clojure "1.10.1"]
-                 ;; TODO: Still needed? Used by old vega renderer
-                 [org.clojure/data.json "0.2.6"]
-                 [hiccup "1.0.5"]]
+  :dependencies [[org.clojure/clojure "1.10.1"]]
 
   :profiles {:dev {:dependencies [[clj-kondo "2019.11.23"]]
                    :plugins      [[lein-cljfmt "0.6.6"]

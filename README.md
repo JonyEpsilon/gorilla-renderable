@@ -5,7 +5,7 @@
 of visual repesentation so that the notebook can render them
 - For all clojure/clojurescript datatypes default renderers are defined here
 - Custom data-types can implement the renderable protocol 
-- The notebook receves the render-datastructure and renders it to the notebook cell.
+- The notebook receives the render-datastructure and renders it to the notebook cell.
 
 ```
 (defprotocol Renderable
@@ -20,12 +20,7 @@ Clojure/Clojurescript Data => (render) => Renderable DataStructure => (render) =
 
 Clojure:
 ```
-NOT IMPLEMENTED
-```
-
-Clojurescript:
-```
-TODO
+lein test
 ```
 
 
