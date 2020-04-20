@@ -25,5 +25,5 @@
      (cond
        (contains? m :r) {:type :reagent :content {:hiccup result :map-keywords false :widget false}}
        (contains? m :R) {:type :reagent :content {:hiccup result :map-keywords true :widget true}}
-       (contains? m :render-as) {:type :reagent :content {:hiccup result :map-keywords true :widget true}}
+       (contains? m :p/render-as) {:type :reagent :content {:hiccup result :map-keywords true :widget true}}
        :else (render result))}))
