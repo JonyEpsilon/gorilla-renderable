@@ -23,13 +23,6 @@ Clojure:
 lein test
 ```
 
-
-## History
-
-- This project origianlly comes from https://github.com/JonyEpsilon/gorilla-renderable
-- It is forked to support new features in pink-gorilla.
-
-
 ## Licence
 
 This code is licensed to you under the MIT licence. See LICENCE.txt for details.

@@ -6,7 +6,23 @@
                                      :username :env/release_username
                                      :password :env/release_password
                                      :sign-releases false}]]
-  :dependencies [[org.clojure/clojure "1.10.1"]]
+
+   ;; TODO: prep tasks breaks alias???
+  ;; :prep-tasks ["build-shadow-ci"]
+
+  :release-tasks [["vcs" "assert-committed"]
+                  ["bump-version" "release"]
+                  ["vcs" "commit" "Release %s"]
+                  ["vcs" "tag" "v" "--no-sign"]
+                  ["deploy"]
+                  ["bump-version"]
+                  ["vcs" "commit" "Begin %s"]
+                  ["vcs" "push"]]
+
+
+
+  :dependencies [[org.clojure/clojure "1.10.1"]
+                 [org.clojure/data.codec "0.1.1"]] ; image base64 encoding
 
   :profiles {:dev {:dependencies [[clj-kondo "2019.11.23"]]
                    :plugins      [[lein-cljfmt "0.6.6"]
@@ -23,18 +39,7 @@
                                             merge-meta          [[:inner 0]]
                                             try-if-let          [[:block 1]]}}}}
 
-  ;; TODO: prep tasks breaks alias???
-  ;; :prep-tasks ["build-shadow-ci"]
-
-  :aliases {"bump-version" ["change" "version" "leiningen.release/bump-version"]}
-
-  :release-tasks [["vcs" "assert-committed"]
-                  ["bump-version" "release"]
-                  ["vcs" "commit" "Release %s"]
-                  ["vcs" "tag" "v" "--no-sign"]
-                  ["deploy"]
-                  ["bump-version"]
-                  ["vcs" "commit" "Begin %s"]
-                  ["vcs" "push"]])
+  :aliases {"bump-version" 
+            ["change" "version" "leiningen.release/bump-version"]})
 
 
