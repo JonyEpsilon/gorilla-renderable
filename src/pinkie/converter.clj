@@ -12,9 +12,9 @@
    (users can define their own render implementations)"
   [data]
   (let [m (meta data)]
-    {:value-response
-     (cond
-       (contains? m :r) {:type :reagent :content {:hiccup data :map-keywords false :widget false}}
-       (contains? m :R) {:type :reagent :content {:hiccup data :map-keywords true :widget true}}
-       (contains? m :p/render-as) {:type :reagent :content {:hiccup data :map-keywords true :widget true}}
-       :else (to-pinkie data))}))
+    (cond
+      (contains? m :r) ^{:map-keywords false} data
+      (contains? m :R) ^{:map-keywords true} data
+      (contains? m :p/render-as) (let [tag (:p/render-as m)]
+                                   ^{:map-keywords true} [tag data])
+      :else (to-pinkie data))))
