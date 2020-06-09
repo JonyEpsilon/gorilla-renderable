@@ -41,21 +41,7 @@
 ;; list-alike rendering needs refactoring
 (deftest renderable-map
   (is (= (to-pinkie {:a 1 :b 2})
-         [:div
-          "{"
-          [:div {:class "clj-map"}
-           [:div "["
-            [:div {:class "clj-vector"}
-             [:span {:class "clj-keyword"} ":a"]
-             [:span {:class "clj-long"} "1"]]
-            "]"]
-           [:div
-            "["
-            [:div {:class "clj-vector"}
-             [:span {:class "clj-keyword"} ":b"]
-             [:span {:class "clj-long"} "2"]]
-            "]"]]
-          "}"])))
+         [:div [:span.font-bold.teal-700.mr-1 "{"] [:span {:class "clj-map"} [:div [:span.font-bold.teal-700.mr-1 "["] [:span {:class "clj-vector"} [:span {:class "clj-keyword"} ":a"] [:span {:class "clj-long"} "1"]] [:span.font-bold.teal-700.ml-1 "]"]] [:div [:span.font-bold.teal-700.mr-1 "["] [:span {:class "clj-vector"} [:span {:class "clj-keyword"} ":b"] [:span {:class "clj-long"} "2"]] [:span.font-bold.teal-700.ml-1 "]"]]] [:span.font-bold.teal-700.ml-1 "}"]])))
 
 (defrecord MyRecord [r])
 

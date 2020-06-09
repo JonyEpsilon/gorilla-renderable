@@ -112,12 +112,12 @@
 ; span is used by
 (defn- list-alike [{:keys [class open close sep]} self]
   [:div
-   open
-   (into [:div {:class class
+   [:span.font-bold.teal-700.mr-1 open]
+   (into [:span {:class class
          ;:value (pr-str self)
-                }]
+                 }]
          (map to-pinkie self))
-   close])
+   [:span.font-bold.teal-700.ml-1 close]])
 
 (extend-type clojure.lang.IPersistentVector
   Pinkie
@@ -170,15 +170,6 @@
 ;; the map we to-pinkie each of these key-value pairs with this helper function. They are rendered as list-likes with no
 ;; bracketing. These will then be assembled in to a list-like for the whole map by the IPersistentMap to-pinkie function.
 
-
-(defn- render-map-entry
-  [entry]
-  {:type :list-like
-   :open nil
-   :close nil
-   :separator [:span " "]
-   :items (map to-pinkie entry)
-   :value (pr-str entry)})
 
 (extend-type clojure.lang.IPersistentMap
   Pinkie
