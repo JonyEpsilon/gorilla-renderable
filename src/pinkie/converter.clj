@@ -18,3 +18,6 @@
       (contains? m :p/render-as) (let [tag (:p/render-as m)]
                                    ^{:map-keywords true} [tag data])
       :else (to-pinkie data))))
+
+(defn R [data]
+  (with-meta data {:R true}))
