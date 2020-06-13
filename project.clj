@@ -1,4 +1,4 @@
-(defproject org.pinkgorilla/gorilla-renderable "3.0.13"
+(defproject org.pinkgorilla/gorilla-renderable "3.0.14-SNAPSHOT"
   :description "renderer lookup engine"
   :url "https://github.com/pink-gorilla/gorilla-renderable"
   :license {:name "MIT"}
