@@ -15,6 +15,40 @@ of visual repesentation so that the notebook can render them
 Clojure/Clojurescript Data => (render) => Renderable DataStructure => (render) => Notebook
 
 
+# Clojure/Clojurescript type based rendering
+
+- All clj/cljs datatypes have default renderers that will be selected based on 
+  the type of the data.
+
+## Syntactic sugar for librarys that need visualization
+
+- Goal is to use meta-data to trigger rendering of function output.
+- Say we want a function that creates a vega spec to be rendered with a vega renderer:
+
+```
+(defn timeseries-plot 
+  "timeseries-plot creates vega spec for a timeseries plot"
+  [data] 
+  ^{:render-with :p/vega} vega-spec)
+```
+
+- The user would then use this with:
+
+```
+[:div [:h1 "demo"]
+      (timeseries-plot data)]
+```
+
+- the rendering system would then internally convert this to:
+
+```
+[:div [:h1 "demo"]
+      [:p/vega (timeseries-plot data)]]
+```
+
+- This saves the library author from writing a wrapper.
+
+
 ## Unit Tests 
 
 Clojure:
