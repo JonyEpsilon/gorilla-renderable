@@ -1,0 +1,14 @@
+{
+  "name": "picasso",
+  "version": "0.0.8",
+  "scripts": {
+    "test": "cross-env NODE_ENV=development karma start --single-run"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "cross-env": "^6.0.3",
+    "karma": "^4.4.1",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-cljs-test": "^0.1.0"
+  }
+}

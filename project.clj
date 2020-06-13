@@ -1,5 +1,5 @@
 (defproject org.pinkgorilla/gorilla-renderable "3.0.13-SNAPSHOT"
-  :description "The protocol for custom rendering in Pink Gorilla Notebook."
+  :description "renderer lookup engine"
   :url "https://github.com/pink-gorilla/gorilla-renderable"
   :license {:name "MIT"}
   :deploy-repositories [["releases" {:url "https://clojars.org/repo"
@@ -19,14 +19,17 @@
                   ["vcs" "commit" "Begin %s"]
                   ["vcs" "push"]]
 
-
-
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [org.clojure/data.codec "0.1.1"]] ; image base64 encoding
 
-  :profiles {:dev {:dependencies [[clj-kondo "2019.11.23"]]
+  :profiles {:cljs {:dependencies [[thheller/shadow-cljs "2.8.80"]
+                                  [thheller/shadow-cljsjs "0.0.21"]]} 
+             
+             :dev {:dependencies [
+                                  [clj-kondo "2019.11.23"]]
                    :plugins      [[lein-cljfmt "0.6.6"]
-                                  [lein-cloverage "1.1.2"]]
+                                  [lein-cloverage "1.1.2"]
+                                  [lein-shell "0.5.0"]]
                    :aliases      {"clj-kondo" ["run" "-m" "clj-kondo.main"]}
                    :cloverage    {:codecov? true
                                   ;; In case we want to exclude stuff
@@ -39,7 +42,16 @@
                                             merge-meta          [[:inner 0]]
                                             try-if-let          [[:block 1]]}}}}
 
-  :aliases {"bump-version" 
-            ["change" "version" "leiningen.release/bump-version"]})
+  :aliases {"bump-version"
+            ["change" "version" "leiningen.release/bump-version"]
+
+            "build-shadow-ci" ^{:doc "Build shadow-cljs ci"}
+            ["run" "-m" "shadow.cljs.devtools.cli" "compile" ":ci"]
+
+            "test-run" ^{:doc "Test compiled JavaScript."}
+            ["shell" "./node_modules/karma/bin/karma" "start" "--single-run"]
+
+            "test-js" ^{:doc "Compile & Run JavaScript."}
+            ["with-profile" "+cljs" "do" "build-shadow-ci" ["test-run"]]})
 
 
