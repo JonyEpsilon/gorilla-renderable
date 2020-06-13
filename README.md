@@ -15,12 +15,17 @@ of visual repesentation so that the notebook can render them
 Clojure/Clojurescript Data => (render) => Renderable DataStructure => (render) => Notebook
 
 
-
 ## Unit Tests 
 
 Clojure:
 ```
 lein test
+```
+
+Clojurescript:
+```
+npm install
+lein test-js
 ```
 
 ## Licence
