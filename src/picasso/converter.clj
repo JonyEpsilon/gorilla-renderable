@@ -1,4 +1,6 @@
-(ns picasso.converter)
+(ns picasso.converter
+  (:require
+   [picasso.protocols :refer [render]]))
 
 #_(defn render-renderable
     "rendering via the Renderable protocol (needs renderable project)
@@ -8,6 +10,8 @@
         ;_ (println "response: " response)
           ]
       response))
+
+; This is used by nrepl middleware ro convert type to renderable
 
 (defn ->picasso
   "rendering via the Renderable protocol (needs renderable project)
