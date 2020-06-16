@@ -1,4 +1,4 @@
-(ns pinkgorilla.ui.image
+(ns picasso.render.image
   "Render BufferedImage objects"
   (:import
    [java.awt Image]
@@ -8,7 +8,7 @@
   (:require
    [clojure.data.codec.base64 :as b64]
    [clojure.string :as string]
-   [pinkgorilla.ui.gorilla-renderable :refer [Renderable render]]))
+   [picasso.protocols :refer [make Renderable render]]))
 
 (defn image-to-bytes [^Image image ^String type width height]
   (let [bi (BufferedImage. width height (if (#{"png" "gif"} type)
@@ -22,10 +22,10 @@
 (defrecord ImageView [image alt type width height]
   Renderable
   (render [{:keys [image alt type width height]}]
-    {:type :html
-     :content (format "<img src=\"data:image/%1$s;base64,%2$s\" width=\"%3$s\" height=\"%4$s\" alt=\"%5$s\" />"
-                      type (String. (b64/encode (image-to-bytes image type width height))) width height alt)
-     :value (pr-str image)}))
+    (make
+     :html
+     (format "<img src=\"data:image/%1$s;base64,%2$s\" width=\"%3$s\" height=\"%4$s\" alt=\"%5$s\" />"
+             type (String. (b64/encode (image-to-bytes image type width height))) width height alt))))
 
 (defn image-view [^BufferedImage image & {:keys [alt type width height]}]
   (let [alt (or alt "")

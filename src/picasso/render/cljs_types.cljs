@@ -1,11 +1,10 @@
 
-(ns pinkgorilla.ui.rendererCLJS
+(ns picasso.render.cljs-types
   "equivalent to pinkgorilla.ui.renderer, but for clojurescript
    renders clojurescript data structure to html"
   (:require
    [clojure.string :as string]
-   [pinkgorilla.ui.gorilla-renderable :refer [Renderable render]]))
-
+   [picasso.protocols :refer [make Renderable render]]))
 
 ;;; Helper functions
 
@@ -16,9 +15,8 @@
 
 (defn- span-render
   [thing class]
-  {:type :html
-   :content [:span {:class class} (pr-str thing)]
-   :value (pr-str thing)})
+  (make :hiccup
+        [:span {:class class} (pr-str thing)]))
 
 (defn- span
   [class value]

@@ -1,7 +1,7 @@
-(ns pinkgorilla.ui.helper
+(ns picasso.repl
   "helper functions which should be available from the repl"
   (:require
-   [pinkgorilla.ui.gorilla-renderable :refer [Renderable render]] ; define Renderable (which has render function)
+   [picasso.protocols :refer [make Renderable render]] ; define Renderable (which has render function)
    ))
 
 (defn text!
@@ -9,24 +9,19 @@
   [text]
   (reify Renderable
     (render [_]
-      {:type :text
-       :content
-       {:text  text}
-       ;:value (pr-str self) ; DO NOT SET VALUE; this will fuckup loading. (at least in original gorilla)
-       })))
+      (make  :text
+             {:text  text}))))
 
 (defn R!
-  "renders a reagent widget"
+  "renders a pinkie hiccup spec"
   [r]
   (reify Renderable
     (render [_]
-      {:type    :reagent
-       :content {:hiccup r
-                 :map-kewords true
-                 :widget  true}
-       :value   (pr-str r)
-       ;:value (pr-str self) ; DO NOT SET VALUE; this will fuckup loading. (at least in original gorilla)
-       })))
+      (make
+       :pinkie
+       {:hiccup r
+        :map-kewords true
+        :widget  true}))))
 
 (defn html!
   "renders html to a gorilla cell
@@ -35,6 +30,8 @@
   [html-as-string]
   ^:R [:html html-as-string])
 
+(defn R [data]
+  (with-meta data {:R true}))
 
 
 ;; table-view

@@ -1,6 +1,7 @@
-# Pink Gorilla Renderable [![GitHub Actions status |pink-gorilla/gorilla-renderable](https://github.com/pink-gorilla/gorilla-renderable/workflows/CI/badge.svg)](https://github.com/pink-gorilla/gorilla-renderable/actions?workflow=CI)[![Clojars Project](https://img.shields.io/clojars/v/org.pinkgorilla/gorilla-renderable.svg)](https://clojars.org/org.pinkgorilla/gorilla-renderable)
+# Picasso [![GitHub Actions status |pink-gorilla/gorilla-renderable](https://github.com/pink-gorilla/gorilla-renderable/workflows/CI/badge.svg)](https://github.com/pink-gorilla/gorilla-renderable/actions?workflow=CI)[![Clojars Project](https://img.shields.io/clojars/v/org.pinkgorilla/gorilla-renderable.svg)](https://clojars.org/org.pinkgorilla/gorilla-renderable)
 
-- This project is part of [PinkGorilla Notebook](https://github.com/pink-gorilla/gorilla-notebook)
+- This project is used in [Notebook](https://github.com/pink-gorilla/gorilla-notebook) ,
+  but the library can be used independently.
 - Data structures from clojure/clojurescript have to be converted to some kind
 of visual repesentation so that the notebook can render them
 - For all clojure/clojurescript datatypes default renderers are defined here

@@ -1,6 +1,6 @@
-(defproject org.pinkgorilla/gorilla-renderable "3.0.16-SNAPSHOT"
+(defproject org.pinkgorilla/gorilla-renderable "3.1.1-SNAPSHOT"
   :description "renderer lookup engine"
-  :url "https://github.com/pink-gorilla/gorilla-renderable"
+  :url "https://github.com/pink-gorilla/picasso"
   :license {:name "MIT"}
   :deploy-repositories [["releases" {:url "https://clojars.org/repo"
                                      :username :env/release_username
@@ -19,6 +19,8 @@
                   ["vcs" "commit" "Begin %s"]
                   ["vcs" "push"]]
 
+   :target-path  "target/jar"
+  
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [org.clojure/data.codec "0.1.1"]] ; image base64 encoding
 

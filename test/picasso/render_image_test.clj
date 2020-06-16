@@ -1,15 +1,14 @@
-(ns pinkgorilla.ui.image-test
+(ns picasso.render-image-test
   (:require
    [clojure.test :refer :all]
-   [pinkgorilla.ui.gorilla-renderable :refer [render]]
-   [pinkgorilla.ui.hiccup_renderer] ; bring the renderers into scope
-   [pinkgorilla.ui.image :refer [image-view]])
+   [picasso.protocols :refer [render]]
+   [picasso.render.image :refer [image-view]])
   (:import java.io.File
            java.io.InputStream
            javax.imageio.ImageIO))
 
 (deftest render-image
-  (let [img (ImageIO/read (File. "test/pinkgorilla/ui/brain.jpeg"))
+  (let [img (ImageIO/read (File. "test/picasso/brain.jpeg"))
         view (image-view img)
         rendered (render view)]
     (is (= {:alt ""
