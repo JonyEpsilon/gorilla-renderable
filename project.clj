@@ -1,4 +1,4 @@
-(defproject org.pinkgorilla/gorilla-renderable "3.1.1-SNAPSHOT"
+(defproject org.pinkgorilla/gorilla-renderable "3.1.1"
   :description "renderer lookup engine"
   :url "https://github.com/pink-gorilla/picasso"
   :license {:name "MIT"}
