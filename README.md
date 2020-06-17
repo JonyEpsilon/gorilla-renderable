@@ -1,4 +1,4 @@
-# Picasso [![GitHub Actions status |pink-gorilla/gorilla-renderable](https://github.com/pink-gorilla/gorilla-renderable/workflows/CI/badge.svg)](https://github.com/pink-gorilla/gorilla-renderable/actions?workflow=CI)[![Clojars Project](https://img.shields.io/clojars/v/org.pinkgorilla/gorilla-renderable.svg)](https://clojars.org/org.pinkgorilla/gorilla-renderable)
+# Picasso [![GitHub Actions status |pink-gorilla/picasso](https://github.com/pink-gorilla/picasso/workflows/CI/badge.svg)](https://github.com/pink-gorilla/picasso/actions?workflow=CI)[![Clojars Project](https://img.shields.io/clojars/v/org.pinkgorilla/picasso.svg)](https://clojars.org/org.pinkgorilla/picasso)
 
 - This project is used in [Notebook](https://github.com/pink-gorilla/gorilla-notebook) ,
   but the library can be used independently.
@@ -8,12 +8,23 @@ of visual repesentation so that the notebook can render them
 - Custom data-types can implement the renderable protocol 
 - The notebook receives the render-datastructure and renders it to the notebook cell.
 
+
+This are the core concepts in picasso:
+
+###  render (used in nrepl middleware)
 ```
 (defprotocol Renderable
   (render [self]))
 ```
 
-Clojure/Clojurescript Data => (render) => Renderable DataStructure => (render) => Notebook
+### paint (used in notebook-ui)
+```
+(defmulti paint :type)
+```
+
+
+
+Clojure/Clojurescript Data => (render) => Picasso DataStructure => (paint) => Notebook
 
 
 # Clojure/Clojurescript type based rendering
