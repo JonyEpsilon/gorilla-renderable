@@ -22,6 +22,7 @@
    :target-path  "target/jar"
   
   :dependencies [[org.clojure/clojure "1.10.1"]
+                 [com.rpl/specter "1.1.3"]
                  [org.clojure/data.codec "0.1.1"]] ; image base64 encoding
 
   :profiles {:cljs {:dependencies [[thheller/shadow-cljs "2.8.80"]
