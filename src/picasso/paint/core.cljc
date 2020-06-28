@@ -17,9 +17,9 @@
   (let [{:keys [type content]} picasso-spec]
     (and (map? picasso-spec)
          type
-         content
          (keyword? type)
-         (or (vector? content) (map? content)))))
+         (or (not content) ;reagent-cljs can have empty content when loaded from disk
+             (or (vector? content) (map? content))))))
 
 (defn ->reagent [spec]
   (loop [s spec]
