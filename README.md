@@ -74,6 +74,15 @@ npm install
 lein test-js
 ```
 
+## paint implementation
+
+- `hiccup` picasso
+- `html` - notebook-ui (needs gorilla-ui)
+- `pinkie` notebook-ui (needs pinkie)
+- `reagent` notebook-ui (needs pinkie)
+- `goldly` not yet implemented. will be in goldly 
+
+
 ## Licence
 
 This code is licensed to you under the MIT licence. See LICENCE.txt for details.
