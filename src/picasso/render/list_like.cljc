@@ -10,13 +10,23 @@
   (make :list-like
         (merge options {:items (map render items)})))
 
-(defmethod paint :list-like [{:keys [class open close sep items #_content]}]
-  ;(let [{:keys [class open close sep items]} content]
-  (paint (make
-          :hiccup
-          [:div
-           [:span.font-bold.teal-700.mr-1 open]
-           (into [:span {:class class}]
-                 (map paint items))
-           [:span.font-bold.teal-700.ml-1 close]])))
+(defn paint-list-alike [{:keys [content]}]
+  (let [{:keys [class open close sep items]} content
+        paint-sep (fn [i]
+                    [:span (paint i) sep])]
+    (paint (make
+            :hiccup
+            [:span
+             [:span.font-bold.teal-700.mr-1 open]
+             (into [:span {:class class}]
+                   (map paint-sep items))
+             [:span.font-bold.teal-700.ml-1 close]]))))
+
+(defmethod paint :list-like [{:keys [content] :as picasso-spec}]
+  ; picasso spec requires :type and :content
+  ; but initial gorilla list-alike converter didnt obey this,
+  ; and supplied the options directly.
+  (if content
+    (paint-list-alike content)
+    (paint-list-alike {:content (dissoc picasso-spec :type)})))
 
