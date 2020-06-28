@@ -116,7 +116,7 @@
     (list-like {:class "clj-vector"
                 :open "["
                 :close "]"
-                :sep " "}
+                :separator " "}
                self)))
 
 (extend-type clojure.lang.LazySeq
@@ -125,7 +125,7 @@
     (list-like {:class "clj-lazy-seq"
                 :open "("
                 :close ")"
-                :sep " "}
+                :separator " "}
                self)))
 
 (extend-type clojure.lang.IPersistentList
@@ -134,7 +134,7 @@
     (list-like {:class "clj-list"
                 :open "("
                 :close ")"
-                :sep " "}
+                :separator " "}
                self)))
 
 ;; TODO: is this really necessary? Is there some interface I'm missing for lists? Or would just ISeq work?
@@ -144,7 +144,7 @@
     (list-like {:class "clj-list"
                 :open "("
                 :close ")"
-                :sep " "}
+                :separator " "}
                self)))
 
 (extend-type clojure.lang.Cons
@@ -153,7 +153,7 @@
     (list-like {:class "clj-list"
                 :open "("
                 :close ")"
-                :sep " "}
+                :separator " "}
                self)))
 
 
@@ -168,7 +168,7 @@
     (list-like {:class  "clj-map"
                 :open "{"
                 :close "}"
-                :sep " "}
+                :separator " "}
                self)))
 
 (extend-type clojure.lang.IPersistentSet
@@ -177,7 +177,7 @@
     (list-like {:class  "clj-set"
                 :open "#{"
                 :close "}"
-                :sep " "}
+                :separator " "}
                self)))
 
 ;; A record is like a map, but it is tagged with its type
@@ -187,6 +187,6 @@
     (list-like {:class  "clj-record"
                 :open "{"
                 :close "}"
-                :sep " "
+                :separator " "
                 :type (str "#" (pr-str (type self)))}
                self)))

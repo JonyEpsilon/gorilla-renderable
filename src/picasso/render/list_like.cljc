@@ -6,14 +6,14 @@
    [picasso.protocols :refer [paint]]
    [picasso.protocols :refer [make Renderable render]]))
 
-(defn list-like [{:keys [class open close sep] :as options} items]
+(defn list-like [options items]
   (make :list-like
         (merge options {:items (map render items)})))
 
 (defn paint-list-alike [{:keys [content]}]
-  (let [{:keys [class open close sep items]} content
+  (let [{:keys [class open close separator items]} content
         paint-sep (fn [i]
-                    [:span (paint i) sep])]
+                    [:span (paint i) separator])]
     (paint (make
             :hiccup
             [:span

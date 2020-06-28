@@ -4,7 +4,8 @@
    renders clojurescript data structure to html"
   (:require
    [clojure.string :as string]
-   [picasso.protocols :refer [make Renderable render]]))
+   [picasso.protocols :refer [make Renderable render]]
+   [picasso.render.list-like :refer [list-like]]))
 
 ;;; Helper functions
 
@@ -89,42 +90,42 @@
 (extend-type cljs.core/PersistentArrayMap
   Renderable
   (render [self]
-    {:type :list-like
-     :open (span "clj-map" "{")
-     :close (span "clj-map" "}")
-     :separator [:span ", "]
-     :items (map render-map-entry self)
-     :value (pr-str self)}))
+    (list-like {:open (span "clj-map" "{")
+                :close (span "clj-map" "}")
+                :separator [:span ", "]}
+     ;:items (map render-map-entry self)
+     ;:value (pr-str self)
+               self)))
 
 (extend-type cljs.core/LazySeq
   Renderable
   (render [self]
-    {:type :list-like
-     :open (span "clj-lazy-seq" "(")
-     :close (span "clj-lazy-seq" ")")
-     :separator [:span " "]
-     :items (map render self)
-     :value (pr-str self)}))
+    (list-like {:open (span "clj-lazy-seq" "(")
+                :close (span "clj-lazy-seq" ")")
+                :separator [:span " "]}
+     ;:items (map render self)
+     ;:value (pr-str self)}
+               self)))
 
 (extend-type cljs.core/PersistentVector
   Renderable
   (render [self]
-    {:type :list-like
-     :open (span "clj-vector" "[")
-     :close (span "clj-vector" "]")
-     :separator [:span " "]
-     :items (map render self)
-     :value (pr-str self)}))
+    (list-like {:open (span "clj-vector" "[")
+                :close (span "clj-vector" "]")
+                :separator [:span " "]}
+     ;:items (map render self)
+     ;:value (pr-str self)}
+               self)))
 
 (extend-type cljs.core/PersistentHashSet
   Renderable
   (render [self]
-    {:type :list-like
-     :open (span "clj-set" "#{")
-     :close (span  "clj-set" "}")
-     :separator [:span " "]
-     :items (map render self)
-     :value (pr-str self)}))
+    (list-like {:open (span "clj-set" "#{")
+                :close (span  "clj-set" "}")
+                :separator [:span " "]}
+     ;:items (map render self)
+     ;:value (pr-str self)}
+               self)))
 
 
 ;; This still needs to be implemented:
