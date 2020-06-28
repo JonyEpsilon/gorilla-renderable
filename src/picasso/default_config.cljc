@@ -7,4 +7,5 @@
    #?(:clj [picasso.render.clj-types])
    #?(:clj [picasso.render.image])
 
-   #?(:cljs [picasso.render.cljs-types])))
+   #?(:cljs [picasso.render.cljs-types])
+   #?(:cljs [picasso.render.list-alike])))
