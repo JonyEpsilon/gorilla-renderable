@@ -75,12 +75,13 @@ lein test-js
 ```
 
 ## paint implementation
-
-- `hiccup` picasso
-- `html` - notebook-ui (needs gorilla-ui)
-- `pinkie` notebook-ui (needs pinkie)
-- `reagent` notebook-ui (needs pinkie)
-- `goldly` not yet implemented. will be in goldly 
+- `:default` picasso
+- `:hiccup`  picasso
+- `:html`  notebook-ui (needs gorilla-ui)
+- `:text`  notebook-ui (needs gorilla-ui)
+- `:pinkie` notebook-ui (needs pinkie)
+- `:reagent` notebook-ui (needs pinkie)
+- `:goldly` not yet implemented. will be in goldly 
 
 
 ## Licence

@@ -9,29 +9,29 @@
   [text]
   (reify Renderable
     (render [_]
-      (make  :text
-             {:text  text}))))
-
-(defn R!
-  "renders a pinkie hiccup spec"
-  [r]
-  (reify Renderable
-    (render [_]
-      (make
-       :pinkie
-       {:hiccup r
-        :map-kewords true
-        :widget  true}))))
+      (make :text text))))
 
 (defn html!
   "renders html to a gorilla cell
    if (type string) assumes it is valid html and renders as is
    otherwise will assume it is valid hiccup syntax and render hiccup syntax"
   [html-as-string]
-  ^:R [:html html-as-string])
+  (reify Renderable
+    (render [_]
+      (make :html html-as-string))))
+
+(defn R!
+  "renders a pinkie hiccup spec"
+  [r]
+  (reify Renderable
+    (render [_]
+      (make :pinkie r))))
 
 (defn R [data]
-  (with-meta data {:R true}))
+  (R! data))
+
+
+
 
 
 ;; table-view
