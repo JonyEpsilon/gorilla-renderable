@@ -6,11 +6,11 @@
    [picasso.protocols :refer [paint]]
    [picasso.protocols :refer [make Renderable render]]))
 
-(defn list-alike [{:keys [class open close sep] :as options} self]
-  (make :list-alike
+(defn list-like [{:keys [class open close sep] :as options} self]
+  (make :list-like
         (merge options {:items self})))
 
-(defmethod paint :list-alike [{:keys [class open close sep items #_content]}]
+(defmethod paint :list-like [{:keys [class open close sep items #_content]}]
   ;(let [{:keys [class open close sep items]} content]
   (paint (make
           :hiccup
