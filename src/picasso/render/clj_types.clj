@@ -1,7 +1,8 @@
 (ns picasso.render.clj-types
   "converts clojure values to html representation"
   (:require
-   [picasso.protocols :refer [make Renderable render]]))
+   [picasso.protocols :refer [make Renderable render]]
+   [picasso.render.list-like :refer [list-like]]))
 
 
 ;; helper functions
@@ -109,62 +110,51 @@
 
 ;; renderers for collection of items
 
-; span is used by
-(defn- list-alike [{:keys [class open close sep]} self]
-  (make :hiccup
-        [:div
-         [:span.font-bold.teal-700.mr-1 open]
-         (into [:span {:class class
-         ;:value (pr-str self)
-                       }]
-               (map render self))
-         [:span.font-bold.teal-700.ml-1 close]]))
-
 (extend-type clojure.lang.IPersistentVector
   Renderable
   (render [self]
-    (list-alike {:class "clj-vector"
-                 :open "["
-                 :close "]"
-                 :sep " "}
-                self)))
+    (list-like {:class "clj-vector"
+                :open "["
+                :close "]"
+                :sep " "}
+               self)))
 
 (extend-type clojure.lang.LazySeq
   Renderable
   (render [self]
-    (list-alike {:class "clj-lazy-seq"
-                 :open "("
-                 :close ")"
-                 :sep " "}
-                self)))
+    (list-like {:class "clj-lazy-seq"
+                :open "("
+                :close ")"
+                :sep " "}
+               self)))
 
 (extend-type clojure.lang.IPersistentList
   Renderable
   (render [self]
-    (list-alike {:class "clj-list"
-                 :open "("
-                 :close ")"
-                 :sep " "}
-                self)))
+    (list-like {:class "clj-list"
+                :open "("
+                :close ")"
+                :sep " "}
+               self)))
 
 ;; TODO: is this really necessary? Is there some interface I'm missing for lists? Or would just ISeq work?
 (extend-type clojure.lang.ArraySeq
   Renderable
   (render [self]
-    (list-alike {:class "clj-list"
-                 :open "("
-                 :close ")"
-                 :sep " "}
-                self)))
+    (list-like {:class "clj-list"
+                :open "("
+                :close ")"
+                :sep " "}
+               self)))
 
 (extend-type clojure.lang.Cons
   Renderable
   (render [self]
-    (list-alike {:class "clj-list"
-                 :open "("
-                 :close ")"
-                 :sep " "}
-                self)))
+    (list-like {:class "clj-list"
+                :open "("
+                :close ")"
+                :sep " "}
+               self)))
 
 
 ;; When we render a map we will map over its entries, which will yield key-value pairs represented as vectors. To render
@@ -175,28 +165,28 @@
 (extend-type clojure.lang.IPersistentMap
   Renderable
   (render [self]
-    (list-alike {:class  "clj-map"
-                 :open "{"
-                 :close "}"
-                 :sep " "}
-                self)))
+    (list-like {:class  "clj-map"
+                :open "{"
+                :close "}"
+                :sep " "}
+               self)))
 
 (extend-type clojure.lang.IPersistentSet
   Renderable
   (render [self]
-    (list-alike {:class  "clj-set"
-                 :open "#{"
-                 :close "}"
-                 :sep " "}
-                self)))
+    (list-like {:class  "clj-set"
+                :open "#{"
+                :close "}"
+                :sep " "}
+               self)))
 
 ;; A record is like a map, but it is tagged with its type
 (extend-type clojure.lang.IRecord
   Renderable
   (render [self]
-    (list-alike {:class  "clj-record"
-                 :open "{"
-                 :close "}"
-                 :sep " "
-                 :type (str "#" (pr-str (type self)))}
-                self)))
+    (list-like {:class  "clj-record"
+                :open "{"
+                :close "}"
+                :sep " "
+                :type (str "#" (pr-str (type self)))}
+               self)))

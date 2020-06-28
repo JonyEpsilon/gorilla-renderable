@@ -8,4 +8,4 @@
    #?(:clj [picasso.render.image])
 
    #?(:cljs [picasso.render.cljs-types])
-   #?(:cljs [picasso.render.list-alike])))
+   #?(:cljs [picasso.render.list-like])))
