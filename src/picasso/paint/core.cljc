@@ -13,13 +13,13 @@
    [:h1 "Error! No painter found!"]
    [:p  (pr-str picasso-spec)]])
 
-(defn picasso? [i]
-  (let [{:keys [type content]} i]
-    (and (map? i)
+(defn picasso? [picasso-spec]
+  (let [{:keys [type content]} picasso-spec]
+    (and (map? picasso-spec)
          type
          content
          (keyword? type)
-         (vector? content))))
+         (or (vector? content) (map? content)))))
 
 (defn ->reagent [spec]
   (loop [s spec]
