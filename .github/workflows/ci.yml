@@ -31,7 +31,7 @@ jobs:
     - name: Release
       env:
         RELEASE_USERNAME: ${{ secrets.ReleaseUsername }}
-        RELEASE_PASSWORD: ${{ secrets.ReleasePassword }}
+        RELEASE_PASSWORD: ${{ secrets.clojars }}
       run: |
         git config --global user.email "ci@pinkgorilla.org"
         git config --global user.name "CI/CD"
