@@ -1,6 +1,6 @@
 (ns picasso.converter
   (:require
-   [picasso.protocols :refer [render]]))
+   [picasso.protocols :refer [render make]]))
 
 #_(defn render-renderable
     "rendering via the Renderable protocol (needs renderable project)
@@ -19,7 +19,7 @@
   [result]
   (let [m (meta result)]
     (cond
-      (contains? m :r) {:type :reagent :content {:hiccup result :map-keywords false :widget false}}
-      (contains? m :R) {:type :reagent :content {:hiccup result :map-keywords true :widget true}}
-      (contains? m :p/render-as) {:type :reagent :content {:hiccup result :map-keywords true :widget true}}
+      (contains? m :r) (make :reagent {:hiccup result :map-keywords false})
+      (contains? m :R) (make :reagent {:hiccup result :map-keywords true})
+      (contains? m :p/render-as) (make :reagent {:hiccup result :map-keywords true})
       :else (render result))))

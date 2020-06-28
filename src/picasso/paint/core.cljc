@@ -4,13 +4,14 @@
    [picasso.protocols :refer [paint]]))
 
 (defmethod paint :hiccup [picasso-spec]
+  ; assumes that reagent renders hiccup
+  ; which is correct, except that i des not support string-styles
   (:content picasso-spec))
 
-(defmethod paint :reagent [picasso-spec]
-  (get-in picasso-spec [:content :hiccup]))
-
 (defmethod paint :default [picasso-spec]
-  [:h1 (str "Error! No painter found for:" picasso-spec)])
+  [:div
+   [:h1 "Error! No painter found!"]
+   [:p  (pr-str picasso-spec)]])
 
 (defn picasso? [i]
   (let [{:keys [type content]} i]
