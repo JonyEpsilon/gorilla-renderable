@@ -7,7 +7,7 @@
   (:content picasso-spec))
 
 (defmethod paint :reagent [picasso-spec]
-  (:content picasso-spec))
+  (get-in picasso-spec [:content :hiccup]))
 
 (defmethod paint :default [picasso-spec]
   [:h1 (str "Error! No painter found for:" picasso-spec)])
