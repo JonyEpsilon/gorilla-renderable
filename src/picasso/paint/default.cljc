@@ -1,4 +1,4 @@
-(ns picasso.paint.core
+(ns picasso.paint.default
   (:require
    [picasso.protocols :refer [paint]]))
 

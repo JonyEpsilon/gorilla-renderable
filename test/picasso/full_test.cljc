@@ -1,6 +1,7 @@
 (ns picasso.full-test
   (:require
-   [clojure.test :refer :all]
+   #?(:clj  [clojure.test :refer [deftest is]]
+      :cljs [cljs.test :refer-macros [deftest is]])
    [picasso.default-config]
    [picasso.protocols :refer [paint render]]))
 
