@@ -1,17 +1,12 @@
-(ns picasso.paint.core
+(ns picasso.paint.hiccup
   (:require
    [com.rpl.specter :as s]
    [picasso.protocols :refer [paint]]))
 
 (defmethod paint :hiccup [{:keys [content]}]
   ; assumes that reagent renders hiccup
-  ; which is correct, except that i des not support string-styles
+  ; which is correct, except that it does not support string-styles
   content)
-
-(defmethod paint :default [{:keys [type] :as picasso-spec}]
-  [:div.bg-red-300.border-solid
-   [:h1 (str "Error! Painter [" type "] not found!")]
-   [:p (pr-str picasso-spec)]])
 
 (defn picasso? [picasso-spec]
   (let [{:keys [type content]} picasso-spec]

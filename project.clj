@@ -7,9 +7,6 @@
                                      :password :env/release_password
                                      :sign-releases false}]]
 
-   ;; TODO: prep tasks breaks alias???
-  ;; :prep-tasks ["build-shadow-ci"]
-
   :release-tasks [["vcs" "assert-committed"]
                   ["bump-version" "release"]
                   ["vcs" "commit" "Release %s"]
@@ -19,17 +16,19 @@
                   ["vcs" "commit" "Begin %s"]
                   ["vcs" "push"]]
 
-   :target-path  "target/jar"
-  
-  :dependencies [[org.clojure/clojure "1.10.1"]
-                 [com.rpl/specter "1.1.3"]
+  :target-path  "target/jar"
+
+  :dependencies [[org.clojure/clojure "1.10.3"]
+                 [com.rpl/specter "1.1.3"] ; hiccup -> reagent
                  [org.clojure/data.codec "0.1.1"]] ; image base64 encoding
 
-  :profiles {:cljs {:dependencies [[thheller/shadow-cljs "2.8.80"]
-                                  [thheller/shadow-cljsjs "0.0.21"]]} 
-             
-             :dev {:dependencies [
-                                  [clj-kondo "2019.11.23"]]
+  :profiles {:demo {:source-paths ["profiles/demo/src"]}
+
+             :cljs {:dependencies [[thheller/shadow-cljs "2.12.5"]
+                                   ;[thheller/shadow-cljsjs "0.0.21"] ; already referred to in shadow-cljs
+                                   ]}
+
+             :dev {:dependencies [[clj-kondo "2021.03.31"]]
                    :plugins      [[lein-cljfmt "0.6.6"]
                                   [lein-cloverage "1.1.2"]
                                   [lein-shell "0.5.0"]]
@@ -52,9 +51,14 @@
             ["run" "-m" "shadow.cljs.devtools.cli" "compile" ":ci"]
 
             "test-run" ^{:doc "Test compiled JavaScript."}
-            ["shell" "./node_modules/karma/bin/karma" "start" "--single-run"]
+            ["do"
+             ["shell" "npm" "install"]
+             ["shell" "npm" "test"]]
 
             "test-js" ^{:doc "Compile & Run JavaScript."}
-            ["with-profile" "+cljs" "do" "build-shadow-ci" ["test-run"]]})
+            ["with-profile" "+cljs"
+             "do"
+              ["build-shadow-ci"]
+              ["test-run"]]})
 
 

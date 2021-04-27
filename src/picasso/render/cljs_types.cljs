@@ -3,35 +3,13 @@
   "equivalent to pinkgorilla.ui.renderer, but for clojurescript
    renders clojurescript data structure to html"
   (:require
-   [clojure.string :as string]
-   [picasso.protocols :refer [make Renderable render]]
-   [picasso.render.list-like :refer [list-like]]))
-
-;;; Helper functions
-
-
-;; A lot of things render to an HTML span, with a class to mark the type of thing. This helper constructs the rendered
-;; value in that case.
-
-
-(defn- span-render
-  [thing class]
-  (make :hiccup
-        [:span {:class class} (pr-str thing)]))
-
-(defn- span
-  [class value]
-  [:span {:class class} value]
-  ;; "<span class='clj-lazy-seq'>)</span>"
-  )
-
+   [picasso.protocols :refer [Renderable render]]
+   [picasso.render.span :refer [span-render]]
+   [picasso.render.list-like :refer [list-like-render]]))
 
 ;;; ** Renderers for basic Clojure forms **
 
-
-
 ; nil values are a distinct thing of their own
-
 
 (extend-type nil
   Renderable
@@ -71,61 +49,51 @@
   (render [self]
     (span-render self "clj-boolean")))
 
-
-
 ;; When we render a map we will map over its entries, which will yield key-value pairs represented as vectors. To render
 ;; the map we render each of these key-value pairs with this helper function. They are rendered as list-likes with no
 ;; bracketing. These will then be assembled in to a list-like for the whole map by the IPersistentMap render function.
 
 
-(defn- render-map-entry
-  [entry]
-  {:type :list-like
-   :open nil
-   :close nil
-   :separator [:span " "]
-   :items (map render entry)
-   :value (pr-str entry)})
-
 (extend-type cljs.core/PersistentArrayMap
   Renderable
   (render [self]
-    (list-like {:open (span "clj-map" "{")
-                :close (span "clj-map" "}")
-                :separator [:span ", "]}
-     ;:items (map render-map-entry self)
-     ;:value (pr-str self)
-               self)))
+    (list-like-render
+     {:class "clj-map"
+      :open "{"
+      :close  "}"
+      :separator  ", "}
+     self
+     (vals self))))
 
 (extend-type cljs.core/LazySeq
   Renderable
   (render [self]
-    (list-like {:open (span "clj-lazy-seq" "(")
-                :close (span "clj-lazy-seq" ")")
-                :separator [:span " "]}
-     ;:items (map render self)
-     ;:value (pr-str self)}
-               self)))
+    (list-like-render
+     {:class "clj-lazy-seq"
+      :open  "("
+      :close ")"
+      :separator " "}
+     self)))
 
 (extend-type cljs.core/PersistentVector
   Renderable
   (render [self]
-    (list-like {:open (span "clj-vector" "[")
-                :close (span "clj-vector" "]")
-                :separator [:span " "]}
-     ;:items (map render self)
-     ;:value (pr-str self)}
-               self)))
+    (list-like-render
+     {:class "clj-vector"
+      :open "["
+      :close  "]"
+      :separator " "}
+     self)))
 
 (extend-type cljs.core/PersistentHashSet
   Renderable
   (render [self]
-    (list-like {:open (span "clj-set" "#{")
-                :close (span  "clj-set" "}")
-                :separator [:span " "]}
-     ;:items (map render self)
-     ;:value (pr-str self)}
-               self)))
+    (list-like-render
+     {:class "clj-set"
+      :open "#{"
+      :close  "}"
+      :separator  " "}
+     self)))
 
 
 ;; This still needs to be implemented:

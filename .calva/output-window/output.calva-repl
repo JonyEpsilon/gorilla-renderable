@@ -1,0 +1,64 @@
+; This is the Calva evaluation results output window.
+; TIPS: The keyboard shortcut `ctrl+alt+c o` shows and focuses this window
+;   when connected to a REPL session.
+; Please see https://calva.io/output/ for more info.
+; Happy coding! ♥️
+
+; Jacking in...
+; Starting Jack-in Terminal: lein update-in :dependencies conj '[nrepl,"0.8.3"]' -- update-in :plugins conj '[cider/cider-nrepl,"0.25.11"]' -- update-in '[:repl-options,:nrepl-middleware]' conj '["cider.nrepl/cider-middleware"]' -- with-profile +demo repl :headless
+; Hooking up nREPL sessions...
+; Connected session: clj
+; TIPS: 
+;   - You can edit the contents here. Use it as a REPL if you like.
+;   - `alt+enter` evaluates the current top level form.
+;   - `ctrl+enter` evaluates the current form.
+;   - `alt+up` and `alt+down` traverse up and down the REPL command history
+;      when the cursor is after the last contents at the prompt
+;   - Clojure lines in stack traces are peekable and clickable.
+clj꞉user꞉> 
+; Jack-in done.
+clj꞉user꞉> 
+; Evaluating file: demo.clj
+; Syntax error compiling at (picasso/render/list_like.cljc:1:1).
+; Unable to resolve symbol: ¡ in this context
+; Evaluation of file demo.clj failed: class clojure.lang.Compiler$CompilerException
+
+clj꞉user꞉> 
+clj꞉demo꞉> 
+; Evaluating file: demo.clj
+; Syntax error compiling at (picasso/render/clj_types.clj:1:1).
+; No namespace: picasso.render.list-like
+; Evaluation of file demo.clj failed: class clojure.lang.Compiler$CompilerException
+
+clj꞉demo꞉> 
+clj꞉demo꞉> 
+; Evaluating file: list_like.cljc
+#'picasso.render.list-like/list-like-render
+clj꞉picasso.render.list-like꞉> 
+; Evaluating file: demo.clj
+painter not found:  [:type :hiccup]
+painter not found:  [:content [:span {:class clj-long} 3]]
+[:span {:class "clj-vector"} [:span.font-bold.teal-700.mr-1 "["] [:span.items [:div.bg-red-300.border-solid [:h1 "Error! Painter [] not found!"] [:p "[:type :hiccup]"]] [:div.bg-red-300.border-solid [:h1 "Error! Painter [] not found!"] [:p "[:content [:span {:class \"clj-long\"} \"3\"]]"]]] [:span.font-bold.teal-700.ml-1 "]"]]
+clj꞉demo꞉> 
+[:span {:class "clj-long"} "1"]
+clj꞉demo꞉> 
+[:span {:class "clj-vector"} [:span.font-bold.teal-700.mr-1 "["] [:span.items [:span {:class "clj-long"} "1"]] [:span.font-bold.teal-700.ml-1 "]"]]
+clj꞉demo꞉> 
+[:span {:class "clj-vector"} [:span.font-bold.teal-700.mr-1 "["] [:span.items [:span {:class "clj-long"} "1"] [:span {:class "clj-long"} "2"] [:span {:class "clj-long"} "3"]] [:span.font-bold.teal-700.ml-1 "]"]]
+clj꞉demo꞉> 
+; Syntax error compiling at (profiles/demo/src/demo.clj/demo.clj:11:1).
+; Unable to resolve symbol: paint in this context
+clj꞉demo꞉> 
+; Evaluating file: demo.clj
+[:span {:class "clj-vector"} [:span.font-bold.teal-700.mr-1 "["] [:span.items [:span {:class "clj-long"} "1"] [:span {:class "clj-long"} "2"] [:span {:class "clj-long"} "3"]] [:span.font-bold.teal-700.ml-1 "]"]]
+clj꞉demo꞉> 
+nil
+clj꞉demo꞉> 
+[:span {:class "clj-long"} "1"]
+clj꞉demo꞉> 
+nil
+clj꞉demo꞉> 
+{:type :hiccup, :content [:span {:class "clj-long"} "1"]}
+clj꞉demo꞉> 
+[:span {:class "clj-long"} "1"]
+clj꞉demo꞉> 

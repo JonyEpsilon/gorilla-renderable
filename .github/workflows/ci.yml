@@ -25,9 +25,12 @@ jobs:
         lein deps
     - name: Check formatting
       run: lein cljfmt check
-    - name: Run tests
+    - name: Run tests clj
       run: |
         lein test
+    - name: Run tests cljs
+      run: |
+        lein test-js
     - name: Release
       env:
         RELEASE_USERNAME: ${{ secrets.ReleaseUsername }}
