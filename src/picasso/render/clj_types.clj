@@ -164,8 +164,7 @@
       :open "{"
       :close "}"
       :separator " "}
-     self
-     (vals self))))
+     self)))
 
 (extend-type clojure.lang.IPersistentSet
   Renderable

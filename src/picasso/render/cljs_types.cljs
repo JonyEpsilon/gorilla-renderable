@@ -61,9 +61,18 @@
      {:class "clj-map"
       :open "{"
       :close  "}"
-      :separator  ", "}
-     self
-     (vals self))))
+      :separator  ","}
+     self)))
+
+(extend-type cljs.core/MapEntry
+  Renderable
+  (render [self]
+    (list-like-render
+     {:class "clj-vector"
+      :open "["
+      :close  "]"
+      :separator  " "}
+     self)))
 
 (extend-type cljs.core/LazySeq
   Renderable
@@ -82,6 +91,16 @@
      {:class "clj-vector"
       :open "["
       :close  "]"
+      :separator " "}
+     self)))
+
+(extend-type cljs.core/List
+  Renderable
+  (render [self]
+    (list-like-render
+     {:class "clj-list"
+      :open "("
+      :close  ")"
       :separator " "}
      self)))
 
