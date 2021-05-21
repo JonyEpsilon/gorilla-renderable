@@ -1,15 +1,16 @@
-(ns picasso.kernel-clj-test
+(ns picasso.kernel-edn-test
   (:require
-   [clojure.test :refer [deftest are]]
-   [clojure.core.async :refer [<! go]]
+   [cljs.test :refer [deftest are]]
+   [cljs.core.async :refer [<!] :refer-macros [go]]
    [picasso.kernel.protocol :refer [kernel-eval]]
    [picasso.default-config]  ; side-effects
+   [picasso.kernel.edn] ; side-effects
    ))
 
 (defn r= [a b]
   (= (dissoc a :id) b))
 
-(deftest test-eval-clj
+(deftest test-eval-edn
   "eval with several expressions"
   (go (are [input-clj result]
            (r= (<! (kernel-eval {:kernel :clj :code input-clj}))

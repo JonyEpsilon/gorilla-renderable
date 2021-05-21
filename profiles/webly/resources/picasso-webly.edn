@@ -1,0 +1,20 @@
+{:webly {:title "Webly Demo"
+         :lein-cljs-profile "+demo"
+         :ns-cljs-app [demo.app]
+         :bundle-entry  "demo.app.start ();"
+         :start-user-app [:demo/start]
+         :user-routes-app "demo.routes/routes-app"
+         :user-routes-api "demo.routes/routes-api"}
+
+ :google-analytics {:enabled true} ; set to false to disable google-analytics tracking.
+
+ :timbre-loglevel [[#{"webly.ws.*"} :info]
+                   [#{"webly.user.*"} :info]
+                   [#{"org.eclipse.jetty.*"} :info]
+                   [#{"*"} :debug]]
+
+ :settings {:use-localstorage  true  ; allow user to change settings via localstorage
+            :bongo 777}
+
+ ;
+ }

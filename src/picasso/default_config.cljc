@@ -13,5 +13,8 @@
    [picasso.paint.hiccup]
    [picasso.paint.list-like]
 
+   ; kernel
+   #?(:clj [picasso.kernel.clj])
+   #?(:cljs [picasso.kernel.edn])
    ;
    ))

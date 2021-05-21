@@ -21,8 +21,8 @@ jobs:
           ${{ runner.os }}-maven-
     - name: Install dependencies
       run: |
-        npm install
         lein deps
+        lein webly npm-install
     - name: Check formatting
       run: lein cljfmt check
     - name: Run tests clj

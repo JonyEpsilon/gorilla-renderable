@@ -26,8 +26,12 @@
 
   :profiles {:demo {:source-paths ["profiles/demo/src"]}
 
-             :cljs {:dependencies [[thheller/shadow-cljs "2.12.5"]
-                                   ]}
+             :cljs {:dependencies [[thheller/shadow-cljs "2.12.5"]]}
+
+             :webly {:dependencies [[org.pinkgorilla/webly "0.2.38"]]
+                     :source-paths ["profiles/webly/src"]
+                     :resource-paths  ["target/webly"
+                                       "profiles/webly/resources"]}
 
              :dev {:dependencies [[clj-kondo "2021.03.31"]]
                    :plugins      [[lein-cljfmt "0.6.6"]
@@ -48,18 +52,14 @@
   :aliases {"bump-version"
             ["change" "version" "leiningen.release/bump-version"]
 
-            "build-shadow-ci" ^{:doc "Build shadow-cljs ci"}
-            ["run" "-m" "shadow.cljs.devtools.cli" "compile" ":ci"]
+            "webly"
+            ["with-profile" "+webly" "run" "-m" "demo.app"]
 
-            "test-run" ^{:doc "Test compiled JavaScript."}
+            "test-js" ^{:doc "run unit test JavaScript."}
             ["do"
-             ["shell" "npm" "install"]
-             ["shell" "npm" "test"]]
-
-            "test-js" ^{:doc "Compile & Run JavaScript."}
-            ["with-profile" "+cljs"
-             "do"
-              ["build-shadow-ci"]
-              ["test-run"]]})
+             ["webly" "ci"]
+             ["shell" "npm" "test"]
+             ]
+})
 
 
