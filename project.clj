@@ -19,13 +19,14 @@
   :target-path  "target/jar"
 
   :dependencies [[org.clojure/clojure "1.10.3"]
+                 [org.clojure/core.async "1.3.618"]
                  [com.rpl/specter "1.1.3"] ; hiccup -> reagent
+                 [com.lucasbradstreet/cljs-uuid-utils "1.0.2"] ; uuid - clojurescript
                  [org.clojure/data.codec "0.1.1"]] ; image base64 encoding
 
   :profiles {:demo {:source-paths ["profiles/demo/src"]}
 
              :cljs {:dependencies [[thheller/shadow-cljs "2.12.5"]
-                                   ;[thheller/shadow-cljsjs "0.0.21"] ; already referred to in shadow-cljs
                                    ]}
 
              :dev {:dependencies [[clj-kondo "2021.03.31"]]

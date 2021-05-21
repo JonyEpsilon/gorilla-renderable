@@ -1,4 +1,4 @@
-(ns demo
+(ns demo.paint
   (:require
    [picasso.default-config]
    [picasso.protocols :refer [paint render]]))
