@@ -70,7 +70,7 @@ lein test
 
 Clojurescript:
 ```
-npm install
+lein webly npm-install
 lein test-js
 ```
 

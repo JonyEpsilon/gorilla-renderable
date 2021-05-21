@@ -17,7 +17,7 @@
               ;(into [] (map ->picasso eval-results))
                    ]
                (>! c {:id id
-                      :result picassos}))
+                      :picasso picassos}))
 
              (catch js/Error e
                (println "eval ex: " e)

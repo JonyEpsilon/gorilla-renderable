@@ -18,7 +18,7 @@
               ;(into [] (map ->picasso eval-results))
                    ]
                (>! c {:id id
-                      :result picassos}))
+                      :picasso picassos}))
 
              (catch Exception e
                (println "eval ex: " e)

@@ -5,6 +5,7 @@
    [webly.user.app.app :refer [webly-run!]]
    [demo.routes :refer [routes-api routes-app]]
    ; side-effects 
+   [picasso.default-config]
    [demo.events]
    [demo.pages.main]
    [demo.pages.eval]
