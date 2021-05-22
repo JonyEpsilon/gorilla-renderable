@@ -2,13 +2,14 @@
   (:require
    [clojure.core.async :refer [<! <!! go]]
    [picasso.kernel.protocol :refer [kernel-eval]]
+   [taoensso.timbre :as timbre :refer [debugf info error]]
    ; side-effects
    [picasso.default-config]))
 
 (defn eval-clj [code]
   (go
     (let [er  (<! (kernel-eval {:kernel :clj :code code}))]
-      (println "er:" er))))
+      (info "er:" er))))
 
 (eval-clj "13")
 

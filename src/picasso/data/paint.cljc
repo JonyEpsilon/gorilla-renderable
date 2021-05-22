@@ -1,6 +1,5 @@
 (ns picasso.data.paint)
 
-
 (def hiccup
   {:type :hiccup
    :content [:span {:class "clj-long"} "1"]})

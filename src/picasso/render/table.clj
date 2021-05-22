@@ -1,7 +1,7 @@
 (ns picasso.render.table
-   (:require
-    [picasso.protocols :refer [Renderable render]] ; define Renderable (which has render function)
-    ))
+  (:require
+   [picasso.protocols :refer [Renderable render]] ; define Renderable (which has render function)
+   ))
 
 ;; table-view
 

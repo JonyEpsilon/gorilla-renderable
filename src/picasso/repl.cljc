@@ -28,7 +28,6 @@
   [pinkie-spec]
   (render-as :pinkie pinkie-spec))
 
-
 (comment
   (render (R! '[:h1 "hello, world"]))
   (render (R! '[clock "hello, world"]))

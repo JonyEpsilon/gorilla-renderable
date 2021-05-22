@@ -1,8 +1,9 @@
 (ns picasso.kernel.cell
   (:require
-   #?(:clj  [clojure.core.async :refer [<! go] ]
+   #?(:clj  [clojure.core.async :refer [<! go]]
       :cljs [cljs.core.async :refer [<!] :refer-macros [go]])
    #?(:cljs [reagent.core :as r])
+   [taoensso.timbre :as timbre :refer [debugf info error]]
    [picasso.kernel.picasso :refer [picasso-result]]
    [picasso.kernel.protocol :refer [kernel-eval]]))
 
@@ -14,7 +15,7 @@
     (fn [e]
       (let [er @er
             picasso (when er (:picasso er))]
-        (println "er: " er)
+        (info "er: " er)
         (if picasso
           [picasso-result picasso]
           [:p "evaluating.."])))))

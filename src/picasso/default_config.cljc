@@ -14,7 +14,8 @@
    [picasso.paint.list-like]
 
    ; kernel
+   [picasso.kernel.edn]
    #?(:clj [picasso.kernel.clj])
-   #?(:cljs [picasso.kernel.edn])
+
    ;
    ))
