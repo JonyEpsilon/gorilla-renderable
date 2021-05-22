@@ -1,22 +1,13 @@
 (ns demo.paint
   (:require
    [picasso.default-config]
-   [picasso.protocols :refer [paint render]]))
+   [picasso.protocols :refer [paint render]]
+   [picasso.data.paint :as data]
+   ))
 
 (render 1)
 
-(paint {:type :hiccup
-        :content [:span {:class "clj-long"} "1"]})
+(paint data/hiccup)
 
-(paint
- {:type :list-like
-  :content {:class "clj-vector"
-            :open "["
-            :close "]"
-            :separator " "
-            :items [{:type :hiccup
-                     :content [:span {:class "clj-long"} "1"]}
-                    {:type :hiccup
-                     :content [:span {:class "clj-long"} "2"]}
-                    {:type :hiccup
-                     :content [:span {:class "clj-long"} "3"]}]}})
+(paint data/list-like)
+ 

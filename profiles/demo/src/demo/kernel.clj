@@ -1,17 +1,15 @@
 (ns demo.kernel
-  (:require 
-   [clojure.core.async :refer [<! <!! >! >!! put! chan close! go go-loop]]
+  (:require
+   [clojure.core.async :refer [<! <!! go]]
    [picasso.kernel.protocol :refer [kernel-eval]]
-   [picasso.default-config]  ; side-effects
-   [picasso.kernel.clj] ; side-effects
-   )
-  )
+   ; side-effects
+   [picasso.default-config]))
 
+(defn eval-clj [code]
+  (go
+    (let [er  (<! (kernel-eval {:kernel :clj :code code}))]
+      (println "er:" er))))
 
+(eval-clj "13")
 
-(<!! 
- (kernel-eval {:kernel :clj :code "13"})
- ) 
-
-(<!!
- (kernel-eval {:kernel :clj :code "(+ 1 1) [7 8]"}))
+(eval-clj "(+ 1 1) [7 8]")

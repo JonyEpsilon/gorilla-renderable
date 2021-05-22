@@ -1,13 +1,14 @@
 (ns picasso.kernel.cell
   (:require
-   [cljs.core.async :refer [<!] :refer-macros [go]]
-   [reagent.core :as r]
-   [re-frame.core :as rf]
+   #?(:clj  [clojure.core.async :refer [<! go] ]
+      :cljs [cljs.core.async :refer [<!] :refer-macros [go]])
+   #?(:cljs [reagent.core :as r])
    [picasso.kernel.picasso :refer [picasso-result]]
    [picasso.kernel.protocol :refer [kernel-eval]]))
 
 (defn eval-cell [e]
-  (let [er (r/atom e)]
+  (let [er #?(:clj (atom e)
+              :cljs (r/atom e))]
     (go  (let [ker (<! (kernel-eval e))]
            (reset! er ker)))
     (fn [e]

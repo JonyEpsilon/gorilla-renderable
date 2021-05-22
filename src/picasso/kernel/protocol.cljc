@@ -1,6 +1,6 @@
 (ns picasso.kernel.protocol
   (:require
-   [picasso.kernel.id :refer [guuid]]
+   [picasso.id :refer [guuid]]
    #?(:clj [clojure.core.async :refer [>!  chan close! go]]
       :cljs [cljs.core.async  :refer [>! chan close!]
              :refer-macros [go]])))

@@ -1,8 +1,8 @@
 (ns picasso.kernel.clj
   (:require
    [clojure.core :refer [read-string load-string]]
-   [clojure.core.async :refer [<! <!! >! >!! put! chan close! go go-loop]]
-   [picasso.kernel.id :refer [guuid]]
+   [clojure.core.async :refer [ >! chan close! go]]
+   [picasso.id :refer [guuid]]
    [picasso.kernel.protocol :refer [kernel-eval]]
    [picasso.converter :refer [->picasso]]))
 
@@ -12,14 +12,13 @@
     (println "clj-eval: " code)
     (go (try (let [eval-results (load-string code)
                    ;eval-results (read-string code)
-                   _ (println "eval result: " eval-results)
-                   picassos (->picasso eval-results)
-                   _ (println "picassos: " picassos)
+                   ;_ (println "eval result: " eval-results)
+                   picasso (->picasso eval-results)
+                   ;_ (println "picasso: " picasso)
               ;(into [] (map ->picasso eval-results))
                    ]
                (>! c {:id id
-                      :picasso picassos}))
-
+                      :picasso picasso}))
              (catch Exception e
                (println "eval ex: " e)
                (>! c {:id id

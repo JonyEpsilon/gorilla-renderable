@@ -9,6 +9,7 @@
    [demo.events]
    [demo.pages.main]
    [demo.pages.eval]
+   [demo.pages.doc]
    ))
 
 (defn ^:export start []

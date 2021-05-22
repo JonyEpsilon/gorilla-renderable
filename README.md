@@ -60,6 +60,11 @@ Clojure/Clojurescript Data => (render) => Picasso DataStructure => (paint) => No
 
 - This saves the library author from writing a wrapper.
 
+## UI Demo
+
+```
+lein webly watch
+```
 
 ## Unit Tests 
 

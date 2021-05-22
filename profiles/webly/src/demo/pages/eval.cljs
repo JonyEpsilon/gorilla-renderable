@@ -3,7 +3,9 @@
    [re-frame.core :as rf]
    [webly.web.handler :refer [reagent-page]]
    [picasso.kernel.picasso :refer [picasso-result]]
-   [picasso.kernel.cell :refer [eval-cell]]))
+   [picasso.kernel.cell :refer [eval-cell]]
+   [picasso.data.paint :as data]
+   ))
 
 (defn link-fn [fun text]
   [:a.bg-blue-300.cursor-pointer.hover:bg-red-700.m-1
@@ -20,27 +22,6 @@
   (into [:div.bg-blue-400.m-5.inline-block {:class "w-1/4"}]
         children))
 
-
-(def data-list-like
-  {:type :list-like
-   :content {:class "clj-vector"
-             :open "["
-             :close "]"
-             :separator " "
-             :items [{:type :hiccup
-                      :content [:span {:class "clj-long"} "1"]}
-                     {:type :hiccup
-                      :content [:span {:class "clj-long"} "2"]}
-                     {:type :hiccup
-                      :content [:span {:class "clj-long"} "3"]}]}})
-
-(def data-hiccup
-  {:type :hiccup
-   :content [:span {:class "clj-long"} "1"]})
-
-
-
-
 (defmethod reagent-page :demo/eval [& args]
   [:div
    [:p [link-dispatch [:bidi/goto  :demo/main] "main"]]
@@ -49,10 +30,10 @@
    [block
    [:p.text-4xl "picasso painter"]
     [:p "hiccup painter:"]
-     [picasso-result data-hiccup]
+     [picasso-result data/hiccup]
 
      [:p "list-like painter:"]
-     [picasso-result data-list-like]]
+     [picasso-result data/list-like]]
    
     [block
    [:p.text-4xl "picasso eval"]

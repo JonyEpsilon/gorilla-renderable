@@ -2,7 +2,7 @@
   (:require
    [clojure.edn :refer [read-string]]
    [cljs.core.async :refer [>! chan close! go]]
-   [picasso.kernel.id :refer [guuid]]
+   [picasso.id :refer [guuid]]
    [picasso.kernel.protocol :refer [kernel-eval]]
    [picasso.converter :refer [->picasso]]))
 
