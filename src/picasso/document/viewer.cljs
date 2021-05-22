@@ -1,7 +1,7 @@
 (ns picasso.document.viewer
   (:require
    [re-frame.core :as rf]
-   [picasso.document.rf]))
+   [picasso.document.transactor]))
 
 (defn render-unknown [{:keys [id type data state] :as seg}]
   [:div.render-unknown
@@ -28,4 +28,5 @@
 (defn doc-view-id [opts id]
   (let [doc (rf/subscribe [:doc/view id])]
     (fn [opts id]
+      (rf/dispatch [:doc/doc-active id])
       [doc-view opts @doc])))

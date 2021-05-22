@@ -9,6 +9,15 @@
      :type :md
      :data "# hello, world\n- iii\n- ooo"
      :state nil}
+    {:id 7
+     :type :code
+     :data {:kernel :clj
+            :code "(+ 7 7)"}
+     :state nil}
+    {:id 8
+     :type :md
+     :data "# edn kernel evals\nyes -edn for testing!"
+     :state nil}
     {:id 2
      :type :code
      :data {:kernel :edn

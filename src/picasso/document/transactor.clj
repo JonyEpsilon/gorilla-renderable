@@ -1,4 +1,4 @@
-(ns picasso.document.runner
+(ns picasso.document.transactor
   (:require
    [taoensso.timbre :as timbre :refer [debugf info error]]
    [picasso.document.eval :as eval]
@@ -6,26 +6,24 @@
 
 (defonce doc (atom nil))
 
-(defn run [fun-args]
+(defn exec [fun-args]
   (reset! doc (transact @doc fun-args))
   nil)
 
 (swap! fns-lookup assoc
-       :eval-all (partial eval/eval-all run)
-       :eval-segment (partial eval/eval-segment-id run))
+       :eval-all (partial eval/eval-all exec)
+       :eval-segment (partial eval/eval-segment-id exec))
 
 (comment
   (require '[picasso.data.document])
   (reset! doc picasso.data.document/document)
-  (run [:clear-all])
-  (run [:remove-segment 2])
-  (run [:set-state-segment 2 {:bongo :trott}])
-  (run [:eval-all])
-  (run [:eval-segment 2])
+  (exec [:clear-all])
+  (exec [:remove-segment 2])
+  (exec [:set-state-segment 2 {:bongo :trott}])
+  (exec [:eval-all])
+  (exec [:eval-segment 2])
 
   @doc
-
-
 
 
  ; 

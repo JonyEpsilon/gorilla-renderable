@@ -5,7 +5,7 @@
    [picasso.document.viewer :refer [doc-view doc-view-id]]
    [picasso.data.document :as data]
    [picasso.kernel.picasso :refer [picasso-result]]
-   [picasso.document.rf] ;side-effects
+   [picasso.document.transactor] ;side-effects
    ; ui
    [ui.markdown.goldly.core] ;side-effects
    [ui.markdown.viewer :refer [markdown-viewer]]
@@ -53,8 +53,8 @@
    [:p [link-dispatch [:bidi/goto  :demo/main] "main"]]
    [:h1 "picasso document"]
 
-   [:p [link-dispatch [:doc/modify (:id data/document) :clear-all] "clear all"]]
-   [:p [link-dispatch [:doc/modify (:id data/document) :eval-all] "eval all"]]
+   [:p [link-dispatch [:doc/exec [:clear-all]] "clear all"]]
+   [:p [link-dispatch [:doc/exec [:eval-all]] "eval all"]]
 
    [block
     [:p.text-4xl "doc"]
