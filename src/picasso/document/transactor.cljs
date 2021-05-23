@@ -5,7 +5,8 @@
    [picasso.document.eval :as eval]
    [picasso.document.transact :refer [fns-lookup transact]]
    [picasso.document.position :as pos]
-   [picasso.document.core :as nb]))
+   [picasso.document.core :as nb]
+   [picasso.document.kernel :as k]))
 
 (rf/reg-event-db
  :doc/add
@@ -56,7 +57,8 @@
        ;              (assoc-in doc [:active] id))
        :eval-all (partial eval/eval-all exec)
        :eval-segment (partial eval/eval-segment-id exec)
-       :remove-segment-active pos/remove-active-segment)
+       :remove-segment-active pos/remove-active-segment
+       :kernel-toggle-active k/kernel-toggle-active)
 
 
 ;; compatibility
@@ -101,7 +103,14 @@
  :notebook/segment
  :<- [:notebook]
  (fn [notebook [_ seg-id]]
-   (info "xx seg id: " seg-id)
+   (info "sub seg-id: " seg-id)
    (nb/get-segment notebook seg-id)))
+
+(rf/reg-event-fx
+ :segment-active/kernel-toggle
+ (fn [_ _]
+   (rf/dispatch [:doc/exec [:kernel-toggle-active]])))
+
+
 
 

@@ -14,3 +14,8 @@
                :error "kernel unknown"})
         (close! c))
     c))
+
+(defn available-kernels []
+  (-> (methods kernel-eval)
+      keys))
+

@@ -44,7 +44,7 @@
   )
 
 (defn notebook-view [opts]
-  (let [doc (rf/subscribe [:notebook])
+  (let [doc (rf/subscribe [:notebook]) ; current notebook
         layout (rf/subscribe [:notebook/layout])]
     (fn [opts]
       [template-header-document

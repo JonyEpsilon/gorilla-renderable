@@ -15,7 +15,6 @@
                           (info "pm-text save")
                           (rf/dispatch [:doc/exec [:set-md-segment id text]]))})
 
-
 (defn md-segment-view
   [{:keys [id data]} active?]
   [markdown-viewer {:on-click #(rf/dispatch [:notebook/move :to id])} data])
@@ -25,14 +24,14 @@
   [prosemirror/prosemirror-reagent id pm-fun active?])
 
 (defn md-segment
-  [{:keys [id] :as segment}]
+  [nb-settings {:keys [id] :as seg}]
   (let [segment-active (rf/subscribe [:notebook/segment-active])]
-    (fn [{:keys [id] :as segment}]
+    (fn [nb-settings {:keys [id] :as seg}]
       (let [active? (= (:id @segment-active) id)]
         [:div {;:class  (str "segment md"
                ;             (if active? " selected" ""))
                :on-click #(rf/dispatch [:notebook/move :to id])}
          (if active?
-           [md-segment-edit segment active?]
-           [md-segment-view segment active?])]))))
+           [md-segment-edit seg active?]
+           [md-segment-view seg active?])]))))
 

@@ -74,3 +74,5 @@
    (info "delete active segmentl")
    (rf/dispatch [:doc/exec [:remove-segment-active]])
    db))
+
+

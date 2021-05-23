@@ -53,6 +53,7 @@
    :code-view code-view
    ; if a layout option is passed this will override the settings in localstorage
    ;:layout :single ; :vertical ; :horizontal
+   :view-only true
    })
 
 (defmethod reagent-page :notebook/current [{:keys [route-params query-params handler] :as route}]
