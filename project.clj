@@ -22,6 +22,7 @@
   :dependencies [[org.clojure/tools.reader "1.3.5"] ; tag version
                  [org.clojure/clojure "1.10.3"]
                  [org.clojure/core.async "1.3.618"]
+                 [com.taoensso/timbre "5.1.2"] ; clj/cljs logging
                  [com.rpl/specter "1.1.3"] ; hiccup -> reagent
                  [com.lucasbradstreet/cljs-uuid-utils "1.0.2"] ; uuid - clojurescript
                  [org.clojure/data.codec "0.1.1"]] ; image base64 encoding

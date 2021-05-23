@@ -16,10 +16,10 @@
                result)
 
         "13"
-        {:result {:type :hiccup :content [:span {:class "clj-long"} "13"]}}
+        {:picasso {:type :hiccup :content [:span {:class "clj-long"} "13"]}}
 
         "[7 8]"
-        {:result
+        {:picasso
          {:type :list-like
           :content
           {:class "clj-vector"

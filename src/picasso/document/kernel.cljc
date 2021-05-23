@@ -28,8 +28,7 @@
     (info "available kernels:" available "current kernel:" kernel-current "next kernel: " kernel-next)
     (if kernel-next
       (set-kernel-segment doc id kernel-next)
-      doc
-      )))
+      doc)))
 
 (defn kernel-toggle-active [doc]
   (let [id (pos/active-segment-id doc)]
