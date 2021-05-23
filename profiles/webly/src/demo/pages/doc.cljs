@@ -50,7 +50,8 @@
 (def opts
   {:md-view md-view 
    :code-view code-view
-   :layout :single ; :vertical ; :horizontal
+   ; if a layout option is passed this will override the settings in localstorage
+   ;:layout :single ; :vertical ; :horizontal
    })
 
 (defmethod reagent-page :demo/doc [& args]
@@ -60,6 +61,8 @@
 
    [:p [link-dispatch [:doc/exec [:clear-all]] "clear all"]]
    [:p [link-dispatch [:doc/exec [:eval-all]] "eval all"]]
+   [:p [link-dispatch [:notebook/layout-toggle] "layout"]]
+   
 
    [block
     [:p.text-4xl "doc"]

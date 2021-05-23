@@ -3,7 +3,9 @@
    [re-frame.core :as rf]
    [picasso.document.transactor] ; side-effects
    [picasso.document.position :refer [segment-active]]
-   [ui.notebook.view.layout :refer [notebook-layout]]))
+   [ui.notebook.view.layout :refer [notebook-layout]]
+   [ui.notebook.settings] ; side-effects
+   ))
 
 (defn render-unknown [{:keys [id type data state] :as seg}]
   [:div.render-unknown
@@ -28,10 +30,12 @@
     (into [:div] (map seg-view segments))))
 
 (defn doc-view-id [opts id]
-  (let [doc (rf/subscribe [:doc/view id])]
+  (let [doc (rf/subscribe [:doc/view id])
+        layout (rf/subscribe [:notebook/layout])]
     (fn [opts id]
       (rf/dispatch [:doc/doc-active id])
       ;[doc-view opts @doc]
       [:div.w-full.h-full.min-h-full.bg-gray-100 ; .overflow-scroll
-       [notebook-layout opts (segment-active @doc) (:segments @doc)]])))
+       [:p "layout: " @layout]
+       [notebook-layout (merge {:layout layout} opts) (segment-active @doc) (:segments @doc)]])))
 
