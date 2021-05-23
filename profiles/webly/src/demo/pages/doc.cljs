@@ -2,10 +2,12 @@
   (:require
    [re-frame.core :as rf]
    [webly.web.handler :refer [reagent-page]]
-   [picasso.document.viewer :refer [doc-view doc-view-id]]
+   [ui.notebook.core :refer [doc-view doc-view-id]]
    [picasso.data.document :as data]
-   [picasso.kernel.picasso :refer [picasso-result]]
+   [picasso.kernel.view.picasso :refer [picasso-result]]
+   [picasso.kernel.view.default-painter] ; side-effects
    [picasso.document.transactor] ;side-effects
+   [picasso.document.position] ;side-effects
    ; ui
    [ui.markdown.goldly.core] ;side-effects
    [ui.markdown.viewer :refer [markdown-viewer]]
@@ -46,7 +48,10 @@
 (rf/dispatch [:doc/add data/document])
 
 (def opts
-  {:md-view md-view :code-view code-view})
+  {:md-view md-view 
+   :code-view code-view
+   :layout :single ; :vertical ; :horizontal
+   })
 
 (defmethod reagent-page :demo/doc [& args]
   [:div

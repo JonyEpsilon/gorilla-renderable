@@ -1,4 +1,4 @@
-(ns picasso.kernel.picasso
+(ns picasso.kernel.view.picasso
   (:require
    [picasso.protocols :refer [paint]]))
 

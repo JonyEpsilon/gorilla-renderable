@@ -69,6 +69,12 @@
    code
    doc))
 
+(defn set-md-segment [doc id md]
+  (s/setval
+   [:segments (s/filterer (partial seg-with-id id)) s/ALL :data]
+   md
+   doc))
+
 (defn get-segment [doc id]
   (s/select-first
    [:segments (s/filterer (partial seg-with-id id)) s/FIRST]

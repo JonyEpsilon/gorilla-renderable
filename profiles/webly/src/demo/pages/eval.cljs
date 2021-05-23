@@ -2,8 +2,8 @@
   (:require
    [re-frame.core :as rf]
    [webly.web.handler :refer [reagent-page]]
-   [picasso.kernel.picasso :refer [picasso-result]]
-   [picasso.kernel.cell :refer [eval-cell]]
+   [picasso.kernel.view.picasso :refer [picasso-result]]
+   [picasso.kernel.view.cell :refer [eval-cell]]
    [picasso.data.paint :as data]
    ))
 

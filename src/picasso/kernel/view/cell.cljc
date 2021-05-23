@@ -1,11 +1,11 @@
-(ns picasso.kernel.cell
+(ns picasso.kernel.view.cell
   (:require
    #?(:clj  [clojure.core.async :refer [<! go]]
       :cljs [cljs.core.async :refer [<!] :refer-macros [go]])
    #?(:cljs [reagent.core :as r])
    [taoensso.timbre :as timbre :refer [debugf info error]]
-   [picasso.kernel.picasso :refer [picasso-result]]
-   [picasso.kernel.protocol :refer [kernel-eval]]))
+   [picasso.kernel.protocol :refer [kernel-eval]]
+   [picasso.kernel.view.picasso :refer [picasso-result]]))
 
 (defn eval-cell [e]
   (let [er #?(:clj (atom e)
