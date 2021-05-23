@@ -4,11 +4,6 @@
    [re-frame.core :refer [subscribe dispatch]]
    [picasso.document.position :refer [segment-ids-ordered]]))
 
-(defn segments-ordered [notebook]
-  (let [segments (:segments notebook)
-        segment-ids-ordered (:order notebook)]
-    (vec (map #(get segments %) segment-ids-ordered))))
-
 (defn icon [active-segment-id current-segment-id]
   (let [active? (= active-segment-id current-segment-id)]
     (if active?
@@ -18,7 +13,8 @@
 
 (defn segment-nav-impl [segment-active notebook]
   (into [:div]
-        (map (partial icon segment-active) (segment-ids-ordered notebook))))
+        (map (partial icon segment-active)
+             (segment-ids-ordered notebook))))
 
 (defn segment-nav []
   (let [notebook @(subscribe [:notebook])

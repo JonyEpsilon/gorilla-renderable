@@ -44,7 +44,6 @@
                          :horizontal layout-horizontal
                          layout-vertical)]
     [:div.h-full.min-h-full
-     [:p "multiple"]
      [style-codemirror-inline]
      (for [s segments]
        ^{:key (:id s)}

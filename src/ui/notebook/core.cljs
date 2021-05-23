@@ -5,7 +5,7 @@
    [picasso.document.position :refer [segment-active]]
    [ui.notebook.view.layout :refer [notebook-layout]]
    [ui.notebook.settings] ; side-effects
-   ))
+   [ui.notebook.view.menu :refer [menu]]))
 
 (defn render-unknown [{:keys [id type data state] :as seg}]
   [:div.render-unknown
@@ -25,17 +25,33 @@
   [opts {:keys [id meta segments] :as document}]
   (let [seg-view (partial seg-view opts)]
     [:div
-     [:p "doc id:" id]
      [:p "meta: " (pr-str meta)]]
     (into [:div] (map seg-view segments))))
 
-(defn doc-view-id [opts id]
-  (let [doc (rf/subscribe [:doc/view id])
+(defn template-header-document [header document]
+  [:div {:style {:display "grid"
+                 :height "100vh"
+                 :width "100vw"
+                 :grid-template-columns "auto"
+                 :grid-template-rows "30px auto"}}
+   header
+   ;[:div.overflow-auto.m-0.p-0
+   ; {:style {:background-color "red"
+   ;          :height "100%"
+    ;         :max-height "100%"}}
+   document]
+;  ]
+  )
+
+(defn notebook-view [opts]
+  (let [doc (rf/subscribe [:notebook])
         layout (rf/subscribe [:notebook/layout])]
-    (fn [opts id]
-      (rf/dispatch [:doc/doc-active id])
-      ;[doc-view opts @doc]
-      [:div.w-full.h-full.min-h-full.bg-gray-100 ; .overflow-scroll
-       [:p "layout: " @layout]
-       [notebook-layout (merge {:layout layout} opts) (segment-active @doc) (:segments @doc)]])))
+    (fn [opts]
+      [template-header-document
+       [menu]
+       ;[:div.w-full.h-full.min-h-full.bg-gray-100 ; .overflow-scroll
+       [notebook-layout
+        (merge {:layout @layout} opts)
+        (segment-active @doc)
+        (:segments @doc)]])))
 

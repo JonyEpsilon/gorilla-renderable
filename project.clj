@@ -29,7 +29,7 @@
   :profiles {:demo {:source-paths ["profiles/demo/src"]}         
              :webly {:dependencies [[org.pinkgorilla/webly "0.2.40"]
                                     [org.pinkgorilla/pinkie "0.3.3"] 
-                                    [org.pinkgorilla/ui-markdown "0.0.3"]
+                                    [org.pinkgorilla/ui-markdown "0.0.6"]
                                     [org.pinkgorilla/ui-code "0.0.5"]
                                     ]
                      :source-paths ["profiles/webly/src"]

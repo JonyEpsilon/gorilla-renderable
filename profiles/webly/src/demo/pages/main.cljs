@@ -32,7 +32,7 @@
   [block
    [:p.text-4xl "bidi routes"]
    [:p [link-dispatch [:bidi/goto :demo/eval] "eval"]]
-   [:p [link-dispatch [:bidi/goto :demo/doc] "doc"]]
+   [:p [link-dispatch [:bidi/goto :notebook/current] "notebook"]]
  ])
 
 (defn main []

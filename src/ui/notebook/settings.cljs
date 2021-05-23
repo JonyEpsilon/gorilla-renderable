@@ -3,19 +3,16 @@
    [taoensso.timbre :as timbre :refer [debug info warn error]]
    [re-frame.core :as rf]))
 
-
 (rf/reg-sub
  :notebook/layout
  :<- [:settings] ; defined in webly
  (fn [settings _]
    (or (:layout settings) :single)))
 
-
 (rf/reg-event-fx
  :notebook/layout
  (fn [_ [_ layout]]
    (rf/dispatch [:settings/set :layout layout])))
-
 
 (def layouts
   [:single :horizontal :vertical :stacked])

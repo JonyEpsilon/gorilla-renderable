@@ -13,6 +13,11 @@
 (defn segment-ids-ordered [notebook]
   (:order notebook))
 
+#_(defn segments-ordered [notebook]
+    (let [segments (:segments notebook)
+          segment-ids-ordered (:order notebook)]
+      (vec (map #(get segments %) segment-ids-ordered))))
+
 (defn segment-active [doc]
   (let [active-id (:active doc)
         segment (when (and doc active-id)

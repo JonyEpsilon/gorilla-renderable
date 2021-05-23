@@ -5,7 +5,7 @@
 (def routes-app
   {""        :demo/main
    "eval"    :demo/eval
-    "doc"    :demo/doc
+    "doc"    :notebook/current
    })
 
 (def routes-api

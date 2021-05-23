@@ -17,54 +17,26 @@
                           (info "pm-text save")
                           (rf/dispatch [:doc/exec [:set-md-segment id text]]))})
 
-#_(defn markdown-view [document]
-    [:div.free-markup.prose
-     [markdown-viewer document]])
-
 (defn md-segment-view
-  "markdown segment - view-only mode"
-  [{:keys [id data]}]
-  [:div {; :id id
-         :class "segment free prose"}
-   [:div.segment-main
-    [:p "md-v" id data]
-    [:div.free-markup
-     [markdown-viewer data]]]
-   ^{:key :segment-footer}
-   [:div.segment-footer]])
+  [{:keys [id data]} active?]
+  [markdown-viewer {:on-click #(dispatch [:notebook/move :to id])} data])
 
 (defn md-segment-edit
   [{:keys [id data]} active?]
-  [:div {; :id id
-         :class "segment free prose"}
-   [:div.segment-main
-    [:p "md-edit: " id data]
-    [prosemirror/prosemirror-reagent id pm-fun active?]
-    ;[:div.free-markup
-    ; [markdown-viewer data] 
-    ; ]
-    ]
-   ^{:key :segment-footer}
-   [:div.segment-footer]])
+  [prosemirror/prosemirror-reagent id pm-fun active?])
 
-#_(defn md-segment
-    "markdown segment"
-    [{:keys [id active?] :as segment}]
-    (info "rendering md: " segment)
-    [:div {; :id id
-           :class  (str "segment free"
-                        (if active? " selected" ""))
-           :on-click #(dispatch [:notebook/move :to id])}
-     (if active?
-       [md-segment-edit segment]
-       [md-segment-view segment])
-     ^{:key :segment-footer}
-     [:div.segment-footer]])
+(defn md-segment
+  [{:keys [id] :as segment}]
+  (let [segment-active (rf/subscribe [:notebook/segment-active])]
+    (fn [{:keys [id] :as segment}]
+      (let [active? (= (:id @segment-active) id)]
+        [:div {;:class  (str "segment md"
+               ;             (if active? " selected" ""))
+               :on-click #(rf/dispatch [:notebook/move :to id])}
+         (if active?
+           [md-segment-edit segment active?]
+           [md-segment-view segment active?])]))))
 
-(defn segment-input-md [{:keys [segment-active?] :as opts} {:keys [id] :as segment}]
-  [:div.prose
-   [:p "pm md"]
-   [md-segment-edit segment segment-active?]])
 
 ;; input
 
@@ -112,22 +84,21 @@
          [:div "seg-id: " id (pr-str segment)
           (case type
            ;:code [segment-input-code options eval-result]
-            :md   [segment-input-md options segment]
+            :md   [:div] ; [segment-input-md options segment]
             [:p "unknown type: " type])]]))))
 
 ;; output
 
 
 (defn segment-output [{:keys [type] :as eval-result}]
-  [:div "output: s:"  (pr-str eval-result)
-   (case type
-     :md [md-segment-view eval-result]
+  (case type
+    :md [md-segment eval-result]
      ;:code [eval-result-view eval-result]
-     [:p "output unknown type: " type])])
+    [:div "output unknown type: " type "data: " (pr-str eval-result)]))
 
 (defn segment-output-no-md [{:keys [type] :as eval-result}]
   [:div
    (case type
-     :md [md-segment-view eval-result]
+     :md [md-segment eval-result]
      :code [eval-result-view eval-result]
      [:p "output" type])])

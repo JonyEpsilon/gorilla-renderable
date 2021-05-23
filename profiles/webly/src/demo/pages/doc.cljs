@@ -2,7 +2,7 @@
   (:require
    [re-frame.core :as rf]
    [webly.web.handler :refer [reagent-page]]
-   [ui.notebook.core :refer [doc-view doc-view-id]]
+   [ui.notebook.core :refer [notebook-view]]
    [picasso.data.document :as data]
    [picasso.kernel.view.picasso :refer [picasso-result]]
    [picasso.kernel.view.default-painter] ; side-effects
@@ -46,6 +46,7 @@
       [:p "xxx:" (pr-str state)])]])
 
 (rf/dispatch [:doc/add data/document])
+(rf/dispatch [:doc/doc-active (:id data/document)])
 
 (def opts
   {:md-view md-view 
@@ -54,19 +55,5 @@
    ;:layout :single ; :vertical ; :horizontal
    })
 
-(defmethod reagent-page :demo/doc [& args]
-  [:div
-   [:p [link-dispatch [:bidi/goto  :demo/main] "main"]]
-   [:h1 "picasso document"]
-
-   [:p [link-dispatch [:doc/exec [:clear-all]] "clear all"]]
-   [:p [link-dispatch [:doc/exec [:eval-all]] "eval all"]]
-   [:p [link-dispatch [:notebook/layout-toggle] "layout"]]
-   
-
-   [block
-    [:p.text-4xl "doc"]
-    [:p "edn eval"]
-
-    ;[doc-view opts data/document]
-    [doc-view-id opts (:id data/document)]]])
+(defmethod reagent-page :notebook/current [{:keys [route-params query-params handler] :as route}]
+  [notebook-view opts])
