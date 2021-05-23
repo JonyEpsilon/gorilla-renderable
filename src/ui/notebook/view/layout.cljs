@@ -23,7 +23,6 @@
     ; LEFT: code-mirror / code-completion
    [:div.bg-yellow-500.h-full.flex.flex-col {:class "w-1/2"}
     [segment-nav]
-    [:p "seg: " (pr-str seg)]
     [:div.w-full.bg-red-300.flex-grow
       ;{:style {:height "600px"}}
      [segment-input nb-settings seg]]

@@ -16,6 +16,8 @@
     c))
 
 (defn available-kernels []
-  (-> (methods kernel-eval)
-      keys))
+  (->> (methods kernel-eval)
+       keys
+       (remove #(= :default %))
+       (into [])))
 

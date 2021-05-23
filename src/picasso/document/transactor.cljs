@@ -1,6 +1,6 @@
 (ns picasso.document.transactor
   (:require
-   [taoensso.timbre :as timbre :refer [debugf info error]]
+   [taoensso.timbre :as timbre :refer [debug debugf info error]]
    [re-frame.core :as rf]
    [picasso.document.eval :as eval]
    [picasso.document.transact :refer [fns-lookup transact]]
@@ -103,7 +103,7 @@
  :notebook/segment
  :<- [:notebook]
  (fn [notebook [_ seg-id]]
-   (info "sub seg-id: " seg-id)
+   (debug "sub seg-id: " seg-id)
    (nb/get-segment notebook seg-id)))
 
 (rf/reg-event-fx
